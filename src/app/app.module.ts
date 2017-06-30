@@ -19,8 +19,13 @@ import { AppRoutes } from './app.routing';
 import { AngularFireModule } from 'angularfire2';
 
 import { AuthService } from './services/auth.service';
+import { AdminGuard } from './layouts/admin/admin.guard';
 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/skip';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/do';
 
 
 @NgModule({
@@ -41,6 +46,7 @@ import 'rxjs/add/operator/map';
     ],
     providers: [
         AuthService,
+        AdminGuard,
     ],
     bootstrap:    [ AppComponent ]
 })

@@ -24,7 +24,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
-        this.auth.state$.subscribe((user) => console.log("user", user));
         this.initSidebar();
     }
 
