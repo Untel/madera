@@ -5,25 +5,36 @@ import { AngularFire, AuthMethods, AuthProviders } from 'angularfire2';
 import { FirebaseAuthState } from 'angularfire2/auth';
 import { FirebaseListObservable } from 'angularfire2/database/firebase_list_observable';
 import { FirebaseObjectObservable } from 'angularfire2/database/firebase_object_observable';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
 
   state$: Observable<FirebaseAuthState>;
-  user$: Observable<User>;
+  user$: Observable<User> = new Observable<User>();
 
-  constructor(private af: AngularFire) {
+  constructor(private af: AngularFire, private router: Router ) {
+
     this.state$ = this.af.auth.asObservable();
-    this.state$.subscribe(state => this.user$ = this.af.database.object(`/users/${state.uid}`));
+
+    this.state$.filter(auth => !auth).subscribe(auth => this.router.navigateByUrl('/pages/login'));
+
+    this.user$ = this.state$
+      .filter(auth => !!auth)
+      .switchMap(auth => this.af.database.object(`/users/${auth.uid}`))
+      .do(user => console.log('user', user));
+  }
+
+  logout = () => {
+    return this.af.auth.logout().then(() => {
+    });
   }
 
   loginWithCredentials = (email, password) => {
     return this.af.auth.login({ email, password }, {
       provider: AuthProviders.Password,
       method: AuthMethods.Password
-    }).then(state => {
-
     });
   }
 
@@ -33,12 +44,12 @@ export class AuthService {
       method: AuthMethods.Popup
     }).then(state => {
 
-      const user$: FirebaseObjectObservable<User> = this.af.database.object(`/users/${state.uid}`);
-      const user: User = {
+      const userRef$ = this.af.database.object(`/users/${state.uid}`);
+
+      userRef$.update({
         displayName: state.auth.displayName,
         photoUrl: state.auth.photoURL
-      };
-      user$.update(user);
+      });
 
     });
   }

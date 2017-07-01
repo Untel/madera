@@ -8,9 +8,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/#/dashboard">MD Pro Angular</a>
+                <a class="navbar-brand" href="/">Madera</a>
             </div>
-            <div class="collapse navbar-collapse" id="menu-example">
+            <!--<div class="collapse navbar-collapse" id="menu-example">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="/dashboard">
@@ -33,10 +33,10 @@
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div>-->
         </div>
     </nav>
-    <div class="full-page login-page" filter-color="black" data-image="../../../assets/img/login.jpeg">
+    <div class="full-page login-page" filter-color="black" data-image="/assets/img/background-1.jpg">
         <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
         <div class="content">
             <div class="container">
@@ -44,25 +44,25 @@
                     <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
                         <form method="#" action="#">
                             <div class="card card-login card-hidden">
-                                <div class="card-header text-center" data-background-color="rose">
-                                    <h4 class="card-title">Login</h4>
+                                <div class="card-header text-center" data-background-color="green">
+                                    <h4 class="card-title">Connexion</h4>
                                     <div class="social-line">
-                                        <a href="#btn" class="btn btn-just-icon btn-simple">
+                                        <!--<a href="#btn" class="btn btn-just-icon btn-simple">
                                             <i class="fa fa-facebook-square"></i>
                                         </a>
                                         <a href="#pablo" class="btn btn-just-icon btn-simple">
                                             <i class="fa fa-twitter"></i>
-                                        </a>
+                                        </a>-->
                                         <a (click)="loginWithGoogle()" class="btn btn-just-icon btn-simple">
                                             <i class="fa fa-google-plus"></i>
                                         </a>
                                     </div>
                                 </div>
-                                <p class="category text-center">
+                                <!--<p class="category text-center">
                                     Or Be Classical
-                                </p>
+                                </p>-->
                                 <form #signInForm="ngForm" (ngSubmit)="loginWithCredentials(signInForm.value)">
-                                    {{ signInForm.value | json }}
+                                    <!--{{ signInForm.value | json }}-->
                                     <div class="card-content">
                                         <!--<div class="input-group">
                                             <span class="input-group-addon">
@@ -79,7 +79,7 @@
                                                 <i class="material-icons">email</i>
                                             </span>
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Email address</label>
+                                                <label class="control-label">Adresse e-mail</label>
                                                 <input name="email" ngModel type="email" class="form-control">
                                             </div>
                                         </div>
@@ -88,13 +88,13 @@
                                                 <i class="material-icons">lock_outline</i>
                                             </span>
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Password</label>
+                                                <label class="control-label">Mot de passe</label>
                                                 <input name="password" ngModel type="password" class="form-control">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="footer text-center">
-                                        <button type="submit" class="btn btn-rose btn-simple btn-wd btn-lg">Let's go</button>
+                                        <button type="submit" class="btn btn-primary btn-simple btn-wd btn-lg">Let's go</button>
                                     </div>
                                 </form>
                             </div>

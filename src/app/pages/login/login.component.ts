@@ -22,13 +22,13 @@ export class LoginComponent implements OnInit{
 
     loginWithCredentials({ email, password }) {
         this.auth.loginWithCredentials(email, password).then((state) => {
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/dashboard');
         });
     }
 
     loginWithGoogle() {
         this.auth.loginWithGoogle().then(() => {
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/dashboard');
         });
     }
 

@@ -1,13 +1,13 @@
 
         <div class="logo">
             <div class="logo-normal">
-                <a href="https://www.creative-tim.com" class="simple-text">
-                    Creative Tim
+                <a href="/" class="simple-text">
+                    Madera
                 </a>
             </div>
 
             <div class="logo-img">
-                <img src="/assets/img/angular2-logo-white.png"/>
+                <img src="/assets/img/short-logo.png"/>
             </div>
         </div>
 
@@ -21,16 +21,16 @@
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                         <span>
-                            {{ (auth.user$ | async)?.displayName }}
+                            {{ (auth.user$ | async)?.displayName || 'Anonyme' }}
                             <b class="caret"></b>
                         </span>
                     </a>
                     <div class="collapse" id="collapseExample">
                         <ul class="nav">
                             <li>
-                                <a href="javascript:void(0)">
+                                <a routerLink="/pages/user">
                                     <span class="sidebar-mini">MP</span>
-                                    <span class="sidebar-normal">My Profile</span>
+                                    <span class="sidebar-normal">Mon profil</span>
                                 </a>
                             </li>
                             <li>
