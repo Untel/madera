@@ -35,8 +35,6 @@ export class AuthService {
     return this.af.auth.login({ email, password }, {
       provider: AuthProviders.Password,
       method: AuthMethods.Password
-    }).then(state => {
-
     });
   }
 
@@ -48,11 +46,10 @@ export class AuthService {
 
       const userRef$ = this.af.database.object(`/users/${state.uid}`);
 
-      const user: User = {
+      userRef$.update({
         displayName: state.auth.displayName,
         photoUrl: state.auth.photoURL
-      };
-      userRef$.update(user);
+      });
 
     });
   }
