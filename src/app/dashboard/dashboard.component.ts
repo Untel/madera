@@ -159,7 +159,7 @@ export class DashboardComponent implements OnInit, AfterViewInit{
            "BR": 550,
            "CA": 120,
            "DE": 1300,
-           "FR": 540,
+           "FR": 2540,
            "GB": 690,
            "GE": 200,
            "IN": 200,
