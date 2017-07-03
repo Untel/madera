@@ -1,5 +1,8 @@
 export interface User {
-    uid: string;
     displayName: string;
     photoUrl: string;
+    role: string;
+
+    $key?: string;
+    $exists?: any;
 }
