@@ -1,6 +1,7 @@
 import { AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { ROUTES } from './sidebar-routes.config';
+import { User } from '../models/user.model';
 
 declare const $: any;
 let sidebarTimer;

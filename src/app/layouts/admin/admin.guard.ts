@@ -3,8 +3,6 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { FirebaseAuth } from 'angularfire2';
-
 @Injectable()
 export class AdminGuard implements CanActivate {
 
@@ -17,7 +15,7 @@ export class AdminGuard implements CanActivate {
         this.router.navigateByUrl('/pages/login');
         return false;
       } else {
-        console.log('Can activate admin');
+        console.log('Can access');
         return true;
       }
     });

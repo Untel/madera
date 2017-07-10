@@ -1,4 +1,19 @@
-import { Component,state,style,animate,transition, trigger, keyframes } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+
+import {
+    animate,
+    Component,
+    keyframes,
+    OnDestroy,
+    OnInit,
+    state,
+    style,
+    transition,
+    trigger,
+    ViewChild,
+} from '@angular/core';
+
+import { User } from '../models/user.model';
 
 @Component({
     moduleId: module.id,
@@ -47,4 +62,27 @@ import { Component,state,style,animate,transition, trigger, keyframes } from '@a
         ]
     })
 
-    export class UserComponent{ }
+
+    export class UserComponent implements OnInit, OnDestroy {
+
+        @ViewChild('profilForm') form;
+        user: User;
+
+        constructor(private auth: AuthService) { }
+
+        ngOnInit() {
+            this.auth.user$.subscribe((user) => {
+                this.user = user;
+            });
+        }
+
+        ngOnDestroy() {
+
+        }
+
+        onSubmit() {
+            console.log(this.form.value);
+            console.log(this.user);
+            this.auth.updateUser(this.user);
+        }
+    }

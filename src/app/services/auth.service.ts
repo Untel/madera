@@ -11,48 +11,55 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class AuthService {
 
-  state$: Observable<FirebaseAuthState>;
-  user$: Observable<User> = new Observable<User>();
+    state$: Observable<FirebaseAuthState>;
+    user$: Observable<User> = new Observable<User>();
 
-  constructor(private af: AngularFire, private router: Router ) {
+    constructor(private af: AngularFire, private router: Router ) {
 
-    this.state$ = this.af.auth.asObservable();
+        this.state$ = this.af.auth.asObservable();
 
-    this.state$.filter(auth => !auth).subscribe(auth => this.router.navigateByUrl('/pages/login'));
+        this.state$.filter(auth => !auth).subscribe(() => this.router.navigateByUrl('/pages/login'));
 
-    this.user$ = this.state$
-      .filter(auth => !!auth)
-      .switchMap(auth => this.af.database.object(`/users/${auth.uid}`))
-      .do(user => console.log('user', user));
-  }
+        this.user$ = this.state$
+            .filter(auth => !!auth)
+            .switchMap( auth => this.af.database.object(`/users/${auth.uid}`), (auth, user) => Object.assign({}, user, auth) );
 
-  logout = () => {
-    return this.af.auth.logout().then(() => {
-    });
-  }
+        this.user$.subscribe(user => console.log('USER Connected: ', user));
+    }
 
-  loginWithCredentials = (email, password) => {
-    return this.af.auth.login({ email, password }, {
-      provider: AuthProviders.Password,
-      method: AuthMethods.Password
-    });
-  }
+    logout = () => {
+        return this.af.auth.logout().then(() => {
+        });
+    }
 
-  loginWithGoogle = () => {
-    return this.af.auth.login({
-      provider: AuthProviders.Google,
-      method: AuthMethods.Popup
-    }).then(state => {
+    loginWithCredentials = (email, password) => {
+        return this.af.auth.login({ email, password }, {
+            provider: AuthProviders.Password,
+            method: AuthMethods.Password
+        });
+    }
 
-      const userRef$ = this.af.database.object(`/users/${state.uid}`);
+    loginWithGoogle = () => {
+        return this.af.auth.login({
+            provider: AuthProviders.Google,
+            method: AuthMethods.Popup
+        }).then(state => {
+            console.log(state);
 
-      userRef$.update({
-        displayName: state.auth.displayName,
-        photoUrl: state.auth.photoURL
-      });
+            const userRef$ = this.af.database.object(`/users/${state.uid}`);
+            userRef$.update({
+                displayName: state.auth.displayName,
+                photoUrl: state.auth.photoURL
+            });
 
-    });
-  }
+        });
+    }
+
+    updateUser = (user: User) => {
+        let uid = this.af.auth.getAuth().uid;
+        const userRef$ = this.af.database.object(`/users/${uid}`);
+        userRef$.update(user);
+    }
 
 
   // register(email: string, password: string) {

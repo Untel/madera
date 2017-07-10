@@ -3,6 +3,11 @@ export interface User {
     photoUrl: string;
     role: string;
 
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+
     $key?: string;
     $exists?: any;
 }

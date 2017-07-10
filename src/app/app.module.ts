@@ -46,7 +46,7 @@ import 'rxjs/add/operator/switchMap';
     declarations: [
         AppComponent,
         AdminLayoutComponent,
-        AuthLayoutComponent
+        AuthLayoutComponent,
     ],
     providers: [
         AuthService,
