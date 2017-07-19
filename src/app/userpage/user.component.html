@@ -63,7 +63,7 @@
                         </a>
                     </div>
                     <div class="card-content">
-                        <legend>Avatar</legend>
+                        <legend>Changer votre photo de profil</legend>
                         <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                             <div class="fileinput-new thumbnail img-circle">
                                 <img src="/assets/img/placeholder.jpg" alt="...">
@@ -76,9 +76,14 @@
                                     <input type="file" name="..." />
                                 </span>
                                 <br />
-                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                <a href="javascript:void(0);" class="btn btn-danger btn fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                <a href="javascript:void(0);" class="btn btn-info btn" (click)="updateProfilPicture()"><i class="fa fa-times"></i> Upload</a>
+                            </div>
+                            <div>
                             </div>
                         </div>
+                        Photo
+                        {{ photo }}
                     </div>
                 </div>
             </div>

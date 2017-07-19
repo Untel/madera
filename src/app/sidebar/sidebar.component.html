@@ -16,12 +16,12 @@
 
             <div class="user">
                 <div class="photo">
-                    <img [src]="(auth.user | async)?.photoUrl || '/assets/img/placeholder.jpg'" />
+                    <img [src]="user?.photoUrl || '/assets/img/placeholder.jpg'" />
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                         <span>
-                            {{ (auth.user$ | async)?.displayName || 'Anonyme' }}
+                            {{ user?.displayName }}
                             <b class="caret"></b>
                         </span>
                     </a>

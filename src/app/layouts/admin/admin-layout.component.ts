@@ -27,9 +27,11 @@ var md:any ={
 export class AdminLayoutComponent implements OnInit {
     public navItems: NavItem[];
     location: Location;
-    constructor(location:Location) {
+
+    constructor(location: Location) {
         this.location = location;
     }
+    
     ngOnInit() {
 
         var isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;

@@ -22,6 +22,7 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 // Others
 import { AppRoutes } from './app.routing';
 import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
 import { AdminGuard } from './layouts/admin/admin.guard';
 
 import 'rxjs/add/operator/map';
@@ -50,6 +51,7 @@ import 'rxjs/add/operator/switchMap';
     ],
     providers: [
         AuthService,
+        UserService,
         AdminGuard,
     ],
     bootstrap:    [ AppComponent ]

@@ -1,4 +1,5 @@
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 
 import {
     animate,
@@ -14,6 +15,8 @@ import {
 } from '@angular/core';
 
 import { User } from '../models/user.model';
+
+declare var $: any;
 
 @Component({
     moduleId: module.id,
@@ -67,11 +70,12 @@ import { User } from '../models/user.model';
 
         @ViewChild('profilForm') form;
         user: User;
+        photo;
 
-        constructor(private auth: AuthService) { }
+        constructor(private auth: AuthService, private userService: UserService) { }
 
         ngOnInit() {
-            this.auth.user$.subscribe((user) => {
+            this.userService.user$.subscribe((user) => {
                 this.user = user;
             });
         }
@@ -81,8 +85,12 @@ import { User } from '../models/user.model';
         }
 
         onSubmit() {
-            console.log(this.form.value);
-            console.log(this.user);
-            this.auth.updateUser(this.user);
+            this.user = this.form.value;
+            this.userService.updateUser(this.user).then(() => {
+
+            }).catch(err => console.error("Cant save data", err));
+        }
+
+        updateProfilPicture() {
         }
     }
