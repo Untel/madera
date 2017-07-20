@@ -16,21 +16,21 @@
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Prénom</label>
-                                        <input [ngModel]="user?.firstName" name="firstName" type="text" class="form-control">
+                                        <input required minlength="2" [ngModel]="user?.firstName" name="firstName" type="text" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Nom</label>
-                                        <input [ngModel]="user?.lastName" name="lastName" type="text" class="form-control">
+                                        <input required [ngModel]="user?.lastName" name="lastName" type="text" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="col-md-8">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Adresse mail</label>
-                                        <input [ngModel]="user?.email" name="email" type="email" class="form-control">
+                                        <input required [ngModel]="user?.email" name="email" type="email" class="form-control">
                                     </div>
                                 </div>
 
@@ -59,12 +59,13 @@
                 <div class="card card-profile">
                     <div class="card-avatar">
                         <a href="#pablo">
-                            <img class="img" src="../../assets/img/faces/marc.jpg" />
+                            <img style="height: 130px; width: 130px" class="img" [src]="user?.photo" />
                         </a>
                     </div>
+                    
                     <div class="card-content">
-                        <legend>Changer votre photo de profil</legend>
-                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                        <!-- <legend>Changer votre photo de profil</legend> -->
+                        <!-- <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                             <div class="fileinput-new thumbnail img-circle">
                                 <img src="/assets/img/placeholder.jpg" alt="...">
                             </div>
@@ -81,9 +82,22 @@
                             </div>
                             <div>
                             </div>
-                        </div>
-                        Photo
-                        {{ photo }}
+                        </div> -->
+
+                            <div>
+                                <span class="btn btn-rose btn-file">
+                                    <span class="fileinput-new">Choisir une image</span>
+                                    <input (change)="onFileChange($event)" type="file">
+                                </span>
+                            </div>
+
+                            <ly-cropping-img [hidden]="!_img.img" #_img format="png" sizeW="130" sizeH="130" ></ly-cropping-img>
+
+                            <div *ngIf="_img.img">
+                                <button type="button" class="btn btn-info" (click)="_img.zoom('+')">+</button>
+                                <button type="button" class="btn btn-info" (click)="_img.zoom('-')">-</button>
+                                <button type="button" class="btn btn-primary" (click)="_img.center()">Centrer</button>
+                                <button type="button" class="btn btn-success" (click)="updateProfilPicture()">Enregistrer</button>                            </div>
                     </div>
                 </div>
             </div>

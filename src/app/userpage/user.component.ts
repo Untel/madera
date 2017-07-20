@@ -1,5 +1,8 @@
+import { UiService } from '../services/ui.service';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
+
+import { ResizingCroppingImagesComponent } from 'angular2-resizing-cropping-image';
 
 import {
     animate,
@@ -69,15 +72,21 @@ declare var $: any;
     export class UserComponent implements OnInit, OnDestroy {
 
         @ViewChild('profilForm') form;
+        @ViewChild('_img') _img: ResizingCroppingImagesComponent;
         user: User;
         photo;
+        addMode: Boolean = false;
 
-        constructor(private auth: AuthService, private userService: UserService) { }
+        constructor(private userService: UserService, private ui: UiService) { }
 
         ngOnInit() {
             this.userService.user$.subscribe((user) => {
                 this.user = user;
             });
+
+            this._img.sizeW = 200;
+            this._img.sizeH = 200;
+
         }
 
         ngOnDestroy() {
@@ -85,12 +94,27 @@ declare var $: any;
         }
 
         onSubmit() {
-            this.user = this.form.value;
-            this.userService.updateUser(this.user).then(() => {
 
-            }).catch(err => console.error("Cant save data", err));
+            if (this.form.valid) {
+                this.userService.updateUser(this.form.value)
+                    .then( () => this.ui.success('Vos informations ont bien été enregistrées'))
+                    .catch((err) => this.ui.danger('Une érreure s\'est produite'));
+            } else {
+                this.ui.warning('Vos informations ne sont pas correctements remplies');
+            }
+
         }
 
         updateProfilPicture() {
+            const b64img = this._img.imgCrop;
+            
+            this.userService.uploadProfilPicture(b64img)
+                .then( () => this.ui.success('Votre photo de profil à bien étée enregistrée'))
+                .catch((err) => this.ui.danger('Une érreure s\'est produite'));
         }
+
+        onFileChange($event) {
+            this._img.imgChange($event);
+        }
+
     }

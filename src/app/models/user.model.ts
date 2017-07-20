@@ -3,6 +3,8 @@ export interface User {
     photoUrl: string;
     role: string;
 
+    uid: string;
+
     firstName: string;
     lastName: string;
     email: string;

@@ -25,6 +25,7 @@
     "@angular/platform-browser": "^2.4.10",
     "@angular/platform-browser-dynamic": "^2.4.10",
     "@angular/router": "^3.4.0",
+    "angular2-resizing-cropping-image": "^1.0.0-final.4",
     "angularfire2": "^2.0.0-beta.8",
     "animate.css": "^3.5.2",
     "arrive": "^2.3.1",
@@ -39,7 +40,6 @@
     "datatables.net-responsive": "^2.1.1",
     "domready": "^1.0.8",
     "eonasdan-bootstrap-datetimepicker": "4.17.47",
-    "firebase": "^3.0.0",
     "fullcalendar": "^3.4.0",
     "googleapis": "^19.0.0",
     "jasny-bootstrap": "^3.1.3",
@@ -72,5 +72,6 @@
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.0.0"
-  }
+  },
+  "false": {}
 }
