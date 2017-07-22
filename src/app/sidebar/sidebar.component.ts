@@ -1,6 +1,7 @@
 import { AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 import { ROUTES } from './sidebar-routes.config';
+import { User } from '../models/user.model';
 
 declare const $: any;
 let sidebarTimer;
@@ -13,8 +14,9 @@ let sidebarTimer;
 
 export class SidebarComponent implements OnInit, AfterViewInit {
     public menuItems: any[];
+    public user: User;
 
-    constructor(private auth: AuthService) {}
+    constructor(private userService: UserService) {}
 
     isNotMobileMenu() {
         if ($(window).width() > 991) {
@@ -25,6 +27,10 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.initSidebar();
+        this.userService.user$.subscribe((_user) => {
+            _user.displayName = _user.displayName || _user.firstName + ' ' + _user.lastName;
+            this.user = _user;
+        });
     }
 
     initSidebar() {

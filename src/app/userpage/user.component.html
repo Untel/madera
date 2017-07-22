@@ -7,82 +7,47 @@
                         <i class="material-icons">perm_identity</i>
                     </div>
                     <div class="card-content">
-                        <h4 class="card-title">Edit Profile -
-                            <small class="category">Complete your profile</small>
+                        <h4 class="card-title">Profil personnel -
+                            <small class="category">Complétez vos informations</small>
                         </h4>
-                        <form>
+                        <form (ngSubmit)="onSubmit()" #profilForm="ngForm">
                             <div class="row">
-                                <div class="col-md-5">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">Company (disabled)</label>
-                                        <input type="text" class="form-control" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">Username</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">Email address</label>
-                                        <input type="email" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
+
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
-                                        <label class="control-label">Fist Name</label>
-                                        <input type="text" class="form-control">
+                                        <label class="control-label">Prénom</label>
+                                        <input required minlength="2" [ngModel]="user?.firstName" name="firstName" type="text" class="form-control">
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
-                                        <label class="control-label">Last Name</label>
-                                        <input type="text" class="form-control">
+                                        <label class="control-label">Nom</label>
+                                        <input required [ngModel]="user?.lastName" name="lastName" type="text" class="form-control">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
+
+                                <div class="col-md-8">
                                     <div class="form-group label-floating">
-                                        <label class="control-label">Adress</label>
-                                        <input type="text" class="form-control">
+                                        <label class="control-label">Adresse mail</label>
+                                        <input required [ngModel]="user?.email" name="email" type="email" class="form-control">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
+
                                 <div class="col-md-4">
                                     <div class="form-group label-floating">
-                                        <label class="control-label">City</label>
-                                        <input type="text" class="form-control">
+                                        <label class="control-label">Téléphone</label>
+                                        <input [ngModel]="user?.phone" name="phone" type="text" class="form-control">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+
+                                <!--<div class="col-md-8">
                                     <div class="form-group label-floating">
-                                        <label class="control-label">Country</label>
-                                        <input type="text" class="form-control">
+                                        <label class="control-label">Adresse postal</label>
+                                        <input [(ngModel)]="adress" name="name" type="text" class="form-control">
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">Postal Code</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>About Me</label>
-                                        <div class="form-group label-floating">
-                                            <label class="control-label"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
-                                            <textarea class="form-control" rows="5"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div>-->
+
                             </div>
                             <button type="submit" class="btn btn-rose pull-right">Update Profile</button>
                             <div class="clearfix"></div>
@@ -94,26 +59,27 @@
                 <div class="card card-profile">
                     <div class="card-avatar">
                         <a href="#pablo">
-                            <img class="img" src="../../assets/img/faces/marc.jpg" />
+                            <img style="height: 130px; width: 130px" class="img" [src]="user?.photo" />
                         </a>
                     </div>
+                    
                     <div class="card-content">
-                        <legend>Avatar</legend>
-                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                            <div class="fileinput-new thumbnail img-circle">
-                                <img src="/assets/img/placeholder.jpg" alt="...">
-                            </div>
-                            <div class="fileinput-preview fileinput-exists thumbnail img-circle"></div>
-                            <div>
-                                <span class="btn btn-round btn-rose btn-file">
-                                    <span class="fileinput-new">Add Photo</span>
-                                    <span class="fileinput-exists">Change</span>
-                                    <input type="file" name="..." />
-                                </span>
-                                <br />
-                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                            </div>
+                        <div>
+                            <span class="btn btn-rose btn-file">
+                                <span class="fileinput-new">Choisir une image</span>
+                                <input (change)="onFileChange($event)" type="file">
+                            </span>
                         </div>
+
+                        <ly-cropping-img [hidden]="!_img.img" #_img format="png" sizeW="130" sizeH="130" ></ly-cropping-img>
+
+                        <div class="btn-group" *ngIf="_img.img">
+                            <button type="button" class="btn btn-info" (click)="_img.zoom('+')">+</button>
+                            <button type="button" class="btn btn-info" (click)="_img.zoom('-')">-</button>
+                            <button type="button" class="btn btn-primary" (click)="_img.center()">Centrer</button>
+                            <button type="button" class="btn btn-success" (click)="updateProfilPicture()">Enregistrer</button>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

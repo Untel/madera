@@ -11,48 +11,40 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class AuthService {
 
-  state$: Observable<FirebaseAuthState>;
-  user$: Observable<User> = new Observable<User>();
+    state$: Observable<FirebaseAuthState>;
 
-  constructor(private af: AngularFire, private router: Router ) {
+    constructor(private af: AngularFire, private router: Router ) {
+        this.state$ = this.af.auth.asObservable();
+        this.state$.filter(auth => !auth).subscribe(() => this.router.navigateByUrl('/pages/login'));
+    }
 
-    this.state$ = this.af.auth.asObservable();
+    logout = () => {
+        return this.af.auth.logout().then(() => {
+        });
+    }
 
-    this.state$.filter(auth => !auth).subscribe(auth => this.router.navigateByUrl('/pages/login'));
+    loginWithCredentials = (email, password) => {
+        return this.af.auth.login({ email, password }, {
+            provider: AuthProviders.Password,
+            method: AuthMethods.Password
+        });
+    }
 
-    this.user$ = this.state$
-      .filter(auth => !!auth)
-      .switchMap(auth => this.af.database.object(`/users/${auth.uid}`))
-      .do(user => console.log('user', user));
-  }
+    loginWithGoogle = () => {
+        return this.af.auth.login({
+            provider: AuthProviders.Google,
+            method: AuthMethods.Popup
+        }).then(state => {
+            console.log(state);
 
-  logout = () => {
-    return this.af.auth.logout().then(() => {
-    });
-  }
+            const userRef$ = this.af.database.object(`/users/${state.uid}`);
+            userRef$.update({
+                displayName: state.auth.displayName,
+                photoUrl: state.auth.photoURL
+            });
 
-  loginWithCredentials = (email, password) => {
-    return this.af.auth.login({ email, password }, {
-      provider: AuthProviders.Password,
-      method: AuthMethods.Password
-    });
-  }
-
-  loginWithGoogle = () => {
-    return this.af.auth.login({
-      provider: AuthProviders.Google,
-      method: AuthMethods.Popup
-    }).then(state => {
-
-      const userRef$ = this.af.database.object(`/users/${state.uid}`);
-
-      userRef$.update({
-        displayName: state.auth.displayName,
-        photoUrl: state.auth.photoURL
-      });
-
-    });
-  }
+        });
+    }
 
 
   // register(email: string, password: string) {

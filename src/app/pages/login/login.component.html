@@ -44,8 +44,9 @@
                     <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
                         <form method="#" action="#">
                             <div class="card card-login card-hidden">
-                                <div class="card-header text-center" data-background-color="green">
-                                    <h4 class="card-title">Connexion</h4>
+                                <div id="cardHeader" style="" class="card-header text-center" data-background-color="green">
+                                    <h4 class="card-title">{{ ( errorMessage ? 'Erreur' : 'Connexion') }}</h4>
+                                    <p *ngIf="errorMessage">{{ errorMessage }}</p>
                                     <div class="social-line">
                                         <!--<a href="#btn" class="btn btn-just-icon btn-simple">
                                             <i class="fa fa-facebook-square"></i>
@@ -58,8 +59,8 @@
                                         </a>
                                     </div>
                                 </div>
-                                <!--<p class="category text-center">
-                                    Or Be Classical
+                                <!--<p *ngIf="errorMessage" class="category text-center">
+                                    {{ errorMessage }}
                                 </p>-->
                                 <form #signInForm="ngForm" (ngSubmit)="loginWithCredentials(signInForm.value)">
                                     <!--{{ signInForm.value | json }}-->
@@ -94,7 +95,7 @@
                                         </div>
                                     </div>
                                     <div class="footer text-center">
-                                        <button type="submit" class="btn btn-primary btn-simple btn-wd btn-lg">Let's go</button>
+                                        <button type="submit" class="btn btn-primary btn-simple btn-wd btn-lg">Se connecter</button>
                                     </div>
                                 </form>
                             </div>
@@ -103,7 +104,8 @@
                 </div>
             </div>
         </div>
-        <footer class="footer">
+        <!--<footer-cmp></footer-cmp>-->
+        <!--<footer class="footer">
             <div class="container">
                 <nav class="pull-left">
                     <ul>
@@ -135,6 +137,6 @@
                     <a href="https://www.creative-tim.com">Creative Tim</a>, made with love for a better web
                 </p>
             </div>
-        </footer>
+        </footer>-->
     </div>
 </div>

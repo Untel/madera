@@ -1,4 +1,25 @@
-import { Component,state,style,animate,transition, trigger, keyframes } from '@angular/core';
+import { UiService } from '../services/ui.service';
+import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
+
+import { ResizingCroppingImagesComponent } from 'angular2-resizing-cropping-image';
+
+import {
+    animate,
+    Component,
+    keyframes,
+    OnDestroy,
+    OnInit,
+    state,
+    style,
+    transition,
+    trigger,
+    ViewChild,
+} from '@angular/core';
+
+import { User } from '../models/user.model';
+
+declare var $: any;
 
 @Component({
     moduleId: module.id,
@@ -47,4 +68,53 @@ import { Component,state,style,animate,transition, trigger, keyframes } from '@a
         ]
     })
 
-    export class UserComponent{ }
+
+    export class UserComponent implements OnInit, OnDestroy {
+
+        @ViewChild('profilForm') form;
+        @ViewChild('_img') _img: ResizingCroppingImagesComponent;
+        user: User;
+        photo;
+        addMode: Boolean = false;
+
+        constructor(private userService: UserService, private ui: UiService) { }
+
+        ngOnInit() {
+            this.userService.user$.subscribe((user) => {
+                this.user = user;
+            });
+
+            this._img.sizeW = 200;
+            this._img.sizeH = 200;
+
+        }
+
+        ngOnDestroy() {
+
+        }
+
+        onSubmit() {
+
+            if (this.form.valid) {
+                this.userService.updateUser(this.form.value)
+                    .then( () => this.ui.success('Vos informations ont bien été enregistrées'))
+                    .catch((err) => this.ui.danger('Une érreure s\'est produite'));
+            } else {
+                this.ui.warning('Vos informations ne sont pas correctements remplies');
+            }
+
+        }
+
+        updateProfilPicture() {
+            const b64img = this._img.imgCrop;
+            
+            this.userService.uploadProfilPicture(b64img)
+                .then( () => this.ui.success('Votre photo de profil à bien étée enregistrée'))
+                .catch((err) => this.ui.danger('Une érreure s\'est produite'));
+        }
+
+        onFileChange($event) {
+            this._img.imgChange($event);
+        }
+
+    }

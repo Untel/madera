@@ -16,7 +16,6 @@ export class NotificationsComponent implements OnInit{
     	$.notify({
         	icon: "notifications",
         	message: "Welcome to <b>Material Dashboard</b> - a beautiful dashboard for every web developer."
-
         },{
             type: type[color],
             timer: 3000,

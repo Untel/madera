@@ -16,19 +16,25 @@
 
             <div class="user">
                 <div class="photo">
-                    <img [src]="(auth.user | async)?.photoUrl || '/assets/img/placeholder.jpg'" />
+                    <img [src]="user?.photo || '/assets/img/placeholder.jpg'" />
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                         <span>
-                            {{ (auth.user$ | async)?.displayName || 'Anonyme' }}
+                            {{ user?.displayName }}
                             <b class="caret"></b>
                         </span>
                     </a>
                     <div class="collapse" id="collapseExample">
                         <ul class="nav">
-                            <li>
+                            <!-- <li>
                                 <a routerLink="/pages/user">
+                                    <span class="sidebar-mini">MP</span>
+                                    <span class="sidebar-normal">Mon profil</span>
+                                </a>
+                            </li> -->
+                            <li routerLinkActive="active">
+                                <a  [routerLink]="[menuItems[2].path]">
                                     <span class="sidebar-mini">MP</span>
                                     <span class="sidebar-normal">Mon profil</span>
                                 </a>
