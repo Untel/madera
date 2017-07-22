@@ -27,8 +27,14 @@
                     </a>
                     <div class="collapse" id="collapseExample">
                         <ul class="nav">
-                            <li>
+                            <!-- <li>
                                 <a routerLink="/pages/user">
+                                    <span class="sidebar-mini">MP</span>
+                                    <span class="sidebar-normal">Mon profil</span>
+                                </a>
+                            </li> -->
+                            <li routerLinkActive="active">
+                                <a  [routerLink]="[menuItems[2].path]">
                                     <span class="sidebar-mini">MP</span>
                                     <span class="sidebar-normal">Mon profil</span>
                                 </a>

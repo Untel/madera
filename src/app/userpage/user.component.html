@@ -64,40 +64,22 @@
                     </div>
                     
                     <div class="card-content">
-                        <!-- <legend>Changer votre photo de profil</legend> -->
-                        <!-- <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                            <div class="fileinput-new thumbnail img-circle">
-                                <img src="/assets/img/placeholder.jpg" alt="...">
-                            </div>
-                            <div class="fileinput-preview fileinput-exists thumbnail img-circle"></div>
-                            <div>
-                                <span class="btn btn-round btn-rose btn-file">
-                                    <span class="fileinput-new">Add Photo</span>
-                                    <span class="fileinput-exists">Change</span>
-                                    <input type="file" name="..." />
-                                </span>
-                                <br />
-                                <a href="javascript:void(0);" class="btn btn-danger btn fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                                <a href="javascript:void(0);" class="btn btn-info btn" (click)="updateProfilPicture()"><i class="fa fa-times"></i> Upload</a>
-                            </div>
-                            <div>
-                            </div>
-                        </div> -->
+                        <div>
+                            <span class="btn btn-rose btn-file">
+                                <span class="fileinput-new">Choisir une image</span>
+                                <input (change)="onFileChange($event)" type="file">
+                            </span>
+                        </div>
 
-                            <div>
-                                <span class="btn btn-rose btn-file">
-                                    <span class="fileinput-new">Choisir une image</span>
-                                    <input (change)="onFileChange($event)" type="file">
-                                </span>
-                            </div>
+                        <ly-cropping-img [hidden]="!_img.img" #_img format="png" sizeW="130" sizeH="130" ></ly-cropping-img>
 
-                            <ly-cropping-img [hidden]="!_img.img" #_img format="png" sizeW="130" sizeH="130" ></ly-cropping-img>
-
-                            <div *ngIf="_img.img">
-                                <button type="button" class="btn btn-info" (click)="_img.zoom('+')">+</button>
-                                <button type="button" class="btn btn-info" (click)="_img.zoom('-')">-</button>
-                                <button type="button" class="btn btn-primary" (click)="_img.center()">Centrer</button>
-                                <button type="button" class="btn btn-success" (click)="updateProfilPicture()">Enregistrer</button>                            </div>
+                        <div class="btn-group" *ngIf="_img.img">
+                            <button type="button" class="btn btn-info" (click)="_img.zoom('+')">+</button>
+                            <button type="button" class="btn btn-info" (click)="_img.zoom('-')">-</button>
+                            <button type="button" class="btn btn-primary" (click)="_img.center()">Centrer</button>
+                            <button type="button" class="btn btn-success" (click)="updateProfilPicture()">Enregistrer</button>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

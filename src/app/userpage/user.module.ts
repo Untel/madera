@@ -9,10 +9,10 @@ import { UserRoutes } from './user.routing';
 
 @NgModule({
     imports: [
-        LyResizingCroppingImageModule,
         CommonModule,
         RouterModule.forChild(UserRoutes),
         FormsModule,
+        LyResizingCroppingImageModule
     ],
     declarations: [UserComponent]
 })

@@ -19,7 +19,7 @@ export class UserService {
 
         this.user$.distinct().subscribe(user => {
             console.log('USER Connected: ', user);
-            ui.primary(`Bonjour ${user.firstName} !`);
+            // ui.primary(`Bonjour ${user.firstName} !`);
         });
     }
 
