@@ -11,8 +11,8 @@ import { UserRoutes } from './user.routing';
     imports: [
         CommonModule,
         RouterModule.forChild(UserRoutes),
+        LyResizingCroppingImageModule,
         FormsModule,
-        LyResizingCroppingImageModule
     ],
     declarations: [UserComponent]
 })
