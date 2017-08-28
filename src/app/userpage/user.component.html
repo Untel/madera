@@ -1,5 +1,9 @@
 <div class="main-content">
     <div class="container-fluid">
+        <div>
+            
+        </div>
+        
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
@@ -10,13 +14,18 @@
                         <h4 class="card-title">Profil personnel -
                             <small class="category">Complétez vos informations</small>
                         </h4>
+
                         <form (ngSubmit)="onSubmit()" #profilForm="ngForm">
+                            <!-- <pre>
+                                {{ profilForm.valid | json }}
+                            </pre>   -->
                             <div class="row">
 
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Prénom</label>
                                         <input required minlength="2" [ngModel]="user?.firstName" name="firstName" type="text" class="form-control">
+                                        <!-- <span *ngIf="profilForm." -->
                                     </div>
                                 </div>
 
@@ -73,11 +82,13 @@
 
                         <ly-cropping-img [hidden]="!_img.img" #_img format="png" sizeW="130" sizeH="130" ></ly-cropping-img>
 
-                        <div class="btn-group" *ngIf="_img.img">
-                            <button type="button" class="btn btn-info" (click)="_img.zoom('+')">+</button>
-                            <button type="button" class="btn btn-info" (click)="_img.zoom('-')">-</button>
-                            <button type="button" class="btn btn-primary" (click)="_img.center()">Centrer</button>
-                            <button type="button" class="btn btn-success" (click)="updateProfilPicture()">Enregistrer</button>
+                        <div *ngIf="_img.img">    
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-info btn-sm" (click)="_img.zoom('+')">+</button>
+                                <button type="button" class="btn btn-info btn-sm" (click)="_img.zoom('-')">-</button>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-sm" (click)="_img.center()">Centrer</button>
+                            <button type="button" class="btn btn-success btn-sm" (click)="updateProfilPicture()">Enregistrer</button>
                         </div>
                         
                     </div>

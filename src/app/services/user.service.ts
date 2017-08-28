@@ -31,4 +31,5 @@ export class UserService {
     uploadProfilPicture = (b64Img) => {
         return this.af.database.object(`/users/${this.userId}/photo`).set(b64Img);
     }
-}
+} 
+ 

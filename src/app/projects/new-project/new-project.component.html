@@ -1,0 +1,90 @@
+<div class="main-content">
+    <div class="container-fluid">
+		<div class="col-md-12">
+
+			<form (ngSubmit)="onSubmit()" #projectForm="ngForm" >
+
+                <div class="card">
+
+                    <div class="card-header card-header-icon" data-background-color="blue">
+                        <i class="material-icons">apps</i>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Nouveau projet -
+                            <small class="category">Complétez les informations projets</small>
+                        </h4>
+
+
+                            <div class="col-md-8">
+
+                                <div class="col-md-12">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Titre</label>
+										<input required 
+											minlength="2" 
+											[ngModel]="newProject.title" 
+											name="title" 
+											type="text" 
+											class="form-control"/> 
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Description</label>
+										<textarea [ngModel]="newProject.description" 
+											name="title" 
+											type="text" 
+											class="form-control"> 
+										</textarea>
+                                    </div>
+								</div>
+
+							</div>
+
+							<div class="col-md-4">
+								<div>
+									<span *ngIf="newProject.pictures.length === 0"></span>
+
+									<div *ngFor="let picture of newProject.pictures; let i = index">
+										<button (click)="remove" 
+											class="btn btn-just-icon btn-simple btn-twitter">
+											<i class="fa fa-times"></i>
+											<div class="ripple-container"></div>
+										</button>
+										<img [src]="picture" alt="">
+									</div>
+								</div>
+
+								<div class="text-center">
+									<span class="btn btn-rose btn-file">
+										<span class="fileinput-new">Choisir une image</span>
+										<input (change)="onFileChange($event)" type="file">
+									</span>
+								</div>
+							</div>
+
+							<ly-cropping-img [hidden]="!_img.img" #_img format="png"></ly-cropping-img>
+
+							<div class="text-center" *ngIf="_img.img">    
+								<div class="btn-group">
+									<button type="button" class="btn btn-info btn-sm" (click)="_img.zoom('+')">+</button>
+									<button type="button" class="btn btn-info btn-sm" (click)="_img.zoom('-')">-</button>
+								</div>
+								<button type="button" class="btn btn-primary btn-sm" (click)="_img.center()">Centrer</button>
+								<button type="button" class="btn btn-success btn-sm" (click)="addPicture()">Ajouter</button>
+							</div>
+
+                            <div class="clearfix"></div>							
+                            <button type="submit" class="btn btn-info pull-right">Update Profile</button>
+                            <div class="clearfix"></div>
+
+						</div>
+
+				</div>
+
+			</form>
+
+		</div>
+    </div>
+</div>
