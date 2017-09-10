@@ -40,12 +40,12 @@ import 'rxjs/add/operator/distinct';
     imports:      [
         BrowserModule,
         FormsModule,
-        RouterModule.forRoot(AppRoutes),
+        RouterModule.forRoot( AppRoutes ),
         AngularFireModule.initializeApp( environment.firebase ),
         HttpModule,
         SidebarModule,
         NavbarModule,
-        FooterModule
+        FooterModule,
     ],
     declarations: [
         AppComponent,

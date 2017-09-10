@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { LyResizingCroppingImageModule } from 'angular2-resizing-cropping-image';
+import { LyResizingCroppingImageModule } from 'alyle-ui/resizing-cropping-images';
 import { UserComponent } from './user.component';
 import { UserRoutes } from './user.routing';
 
@@ -14,7 +14,9 @@ import { UserRoutes } from './user.routing';
         LyResizingCroppingImageModule,
         FormsModule,
     ],
-    declarations: [UserComponent]
+    declarations: [
+        UserComponent,
+    ]
 })
 
 export class UserModule {}

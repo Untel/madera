@@ -8,42 +8,50 @@ import { UiService } from '../../services/ui.service';
 // import { UserService } from '../../services/user.service';
 import { ProjectService } from '../../services/project.service';
 import { User, Project } from '../../models/all.model';
-import { ResizingCroppingImagesComponent } from 'angular2-resizing-cropping-image';
+
+import { ResizingCroppingImagesComponent as ResizingCroppingImages } from 'alyle-ui/resizing-cropping-images';
+
 @Component({
   templateUrl: './new-project.component.html',
   styleUrls: ['./new-project.component.css']
 })
 export class NewProjectComponent implements OnInit {
-    @ViewChild('projectForm') form;
-    @ViewChild('_img') _img: ResizingCroppingImagesComponent;
-	
-	newProject: Project = {
-		title: '',
-		description: '',
-		pictures: []
-	};
+    // @ViewChild('projectForm') form;
+    @ViewChild('_img') _img: ResizingCroppingImages;
 
-    constructor(projectService: ProjectService) { }
+    pictures: string[] = [];
+
+    constructor(private projectService: ProjectService) { }
 
     ngOnInit() {
 		this._img.sizeW = 400;
 		this._img.sizeH = 300;
     }
 
-    ngOnDestroy() {
+    // ngOnDestroy() {
 
-    }
+    // }
 
-    onSubmit() {
-
+    onSubmit(form) {
+        const project: Project = {
+            title: form.title,
+            description: form.description,
+            pictures: this.pictures
+        };
+        this.projectService.createProject(project);
     }
 
    	addPicture() {
 		const b64img = this._img.imgCrop;
 
-		this.newProject.pictures.push(b64img);
+		this.pictures.push(b64img);
 
-		this._img.img = null;
+        this._img.img = null;
+		this._img.imgCrop = null;
+    }
+
+    removePicture(index) {
+        this.pictures.splice(index, 1);
     }
 
     onFileChange($event) {

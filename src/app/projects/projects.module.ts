@@ -8,7 +8,7 @@ import { NewProjectComponent } from './new-project/new-project.component';
 import { ProjectService } from '../services/project.service';
 import { FormsModule } from '@angular/forms';
 
-import { LyResizingCroppingImageModule } from 'angular2-resizing-cropping-image';
+import { LyResizingCroppingImageModule } from 'alyle-ui/resizing-cropping-images';
 
 @NgModule({
   imports: [

@@ -2,7 +2,7 @@ import { UiService } from '../services/ui.service';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 
-import { ResizingCroppingImagesComponent } from 'angular2-resizing-cropping-image';
+import { ResizingCroppingImagesComponent as ResizingCroppingImages } from 'alyle-ui/resizing-cropping-images';
 
 import {
     animate,
@@ -72,7 +72,7 @@ declare var $: any;
     export class UserComponent implements OnInit, OnDestroy {
 
         @ViewChild('profilForm') form;
-        @ViewChild('_img') _img: ResizingCroppingImagesComponent;
+        @ViewChild('_img') _img: ResizingCroppingImages;
         user: User;
         photo;
         addMode: Boolean = false;
@@ -107,9 +107,12 @@ declare var $: any;
 
         updateProfilPicture() {
             const b64img = this._img.imgCrop;
-            
             this.userService.uploadProfilPicture(b64img)
-                .then( () => this.ui.success('Votre photo de profil à bien étée enregistrée'))
+                .then( () => {
+                    this.ui.success('Votre photo de profil à bien étée enregistrée');
+                    this._img.imgCrop = null;
+                    this._img.img = null;
+                })
                 .catch((err) => this.ui.danger('Une érreure s\'est produite'));
         }
 

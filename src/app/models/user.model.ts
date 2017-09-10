@@ -1,6 +1,6 @@
 export interface User {
     displayName: string;
-    photoUrl: string;
+    photo: string;
     role: string;
 
     uid: string;

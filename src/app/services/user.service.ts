@@ -1,3 +1,4 @@
+import { FirebaseListObservable } from 'angularfire2/database';
 import { UiService } from './ui.service';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
@@ -9,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 export class UserService {
 
     public user$: Observable<User> = new Observable<User>();
+    public users$: FirebaseListObservable<User[]>;
     private userId;
 
     constructor(private auth: AuthService, private af: AngularFire, ui: UiService) {
@@ -17,10 +19,7 @@ export class UserService {
             .filter( auth => !!auth )
             .switchMap( auth => this.af.database.object(`/users/${auth.uid}`), (auth, user) => Object.assign({}, user, auth) );
 
-        this.user$.distinct().subscribe(user => {
-            console.log('USER Connected: ', user);
-            // ui.primary(`Bonjour ${user.firstName} !`);
-        });
+        this.users$ = this.af.database.list('/users');
     }
 
     updateUser = (user: User) => {
@@ -31,5 +30,12 @@ export class UserService {
     uploadProfilPicture = (b64Img) => {
         return this.af.database.object(`/users/${this.userId}/photo`).set(b64Img);
     }
-} 
- 
+
+    getUsers = () => {
+        return this.users$;
+    }
+
+    getUsersByRole = (role: string) => {
+        return this.users$.filter(u => u.role === role);
+    }
+}

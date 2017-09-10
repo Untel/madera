@@ -2,7 +2,7 @@
     <div class="container-fluid">
 		<div class="col-md-12">
 
-			<form (ngSubmit)="onSubmit()" #projectForm="ngForm" >
+			<form (ngSubmit)="onSubmit(projectForm.value)" #projectForm="ngForm" >
 
                 <div class="card">
 
@@ -17,23 +17,31 @@
 
                             <div class="col-md-8">
 
-                                <div class="col-md-12">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">Titre</label>
-										<input required 
-											minlength="2" 
-											[ngModel]="newProject.title" 
-											name="title" 
-											type="text" 
-											class="form-control"/> 
-                                    </div>
-                                </div>
+								<div class="row">
 
-                                <div class="col-md-12">
+									<div class="8">
+										<div class="form-group label-floating">
+											<label class="control-label">Titre</label>
+											<input required 
+												minlength="2" 
+												ngModel
+												name="title" 
+												type="text" 
+												class="form-control"/> 
+										</div>
+									</div>
+									
+									<div class="col-md-4">
+										
+									</div>
+
+								</div>
+
+                                <div class="">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Description</label>
-										<textarea [ngModel]="newProject.description" 
-											name="title" 
+										<textarea ngModel 
+											name="description" 
 											type="text" 
 											class="form-control"> 
 										</textarea>
@@ -44,13 +52,13 @@
 
 							<div class="col-md-4">
 								<div>
-									<span *ngIf="newProject.pictures.length === 0"></span>
+									<span *ngIf="pictures.length === 0"></span>
 
-									<div *ngFor="let picture of newProject.pictures; let i = index">
-										<button (click)="remove" 
-											class="btn btn-just-icon btn-simple btn-twitter">
+									<div *ngFor="let picture of pictures; let i = index">
+										<button 
+											(click)="removePicture(i)" 
+											class="btn btn-just-icon btn-simple btn-twitter remove-btn">
 											<i class="fa fa-times"></i>
-											<div class="ripple-container"></div>
 										</button>
 										<img [src]="picture" alt="">
 									</div>
@@ -58,25 +66,30 @@
 
 								<div class="text-center">
 									<span class="btn btn-rose btn-file">
-										<span class="fileinput-new">Choisir une image</span>
+										<span class="fileinput-new">Ajouter une image</span>
 										<input (change)="onFileChange($event)" type="file">
 									</span>
 								</div>
 							</div>
 
-							<ly-cropping-img [hidden]="!_img.img" #_img format="png"></ly-cropping-img>
+							<ly-cropping [style.display]="!_img.img?'none':'inherit'" #_img></ly-cropping>
 
 							<div class="text-center" *ngIf="_img.img">    
-								<div class="btn-group">
-									<button type="button" class="btn btn-info btn-sm" (click)="_img.zoom('+')">+</button>
-									<button type="button" class="btn btn-info btn-sm" (click)="_img.zoom('-')">-</button>
-								</div>
+
+								<button class="btn btn-just-icon btn-simple btn-sm" (click)="_img.zoom('+')">
+									<i class="material-icons">zoom_in</i>
+								</button>
+
 								<button type="button" class="btn btn-primary btn-sm" (click)="_img.center()">Centrer</button>
 								<button type="button" class="btn btn-success btn-sm" (click)="addPicture()">Ajouter</button>
+
+								<button class="btn btn-just-icon btn-simple btn-sm" (click)="_img.zoom('-')">
+									<i class="material-icons">zoom_out</i>										
+								</button>
 							</div>
 
                             <div class="clearfix"></div>							
-                            <button type="submit" class="btn btn-info pull-right">Update Profile</button>
+                            <button type="submit" class="btn btn-info pull-right">Créer le projet</button>
                             <div class="clearfix"></div>
 
 						</div>

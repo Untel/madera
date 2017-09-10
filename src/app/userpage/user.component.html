@@ -80,7 +80,7 @@
                             </span>
                         </div>
 
-                        <ly-cropping-img [hidden]="!_img.img" #_img format="png" sizeW="130" sizeH="130" ></ly-cropping-img>
+                        <ly-cropping [style.display]="!_img.img?'none':'inherit'" #_img sizeW="130" sizeH="130" ></ly-cropping>
 
                         <div *ngIf="_img.img">    
                             <div class="btn-group">
