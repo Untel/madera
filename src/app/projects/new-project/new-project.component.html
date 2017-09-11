@@ -19,7 +19,7 @@
 
 								<div class="row">
 
-									<div class="8">
+									<div class="col-md-8">
 										<div class="form-group label-floating">
 											<label class="control-label">Titre</label>
 											<input required 
@@ -30,12 +30,48 @@
 												class="form-control"/> 
 										</div>
 									</div>
-									
-									<div class="col-md-4">
-										
-									</div>
 
+									<div class="col-md-4">
+										<div class="form-group label-floating">
+											<label class="control-label">Clients</label>
+											<select 
+												class="selectpicker selectCustomer fixIcon" 
+												data-style="select-with-transition" 
+												title="Clients" 
+												data-size="7"
+												name="customers"
+												ngModel>
+												<option disabled>Selectionnez les clients en liés à ce projet</option>
+												<option [value]="customer?.$key"
+													*ngFor="let customer of customers">
+													{{ customer?.firstName + ' ' + customer?.lastName }}
+												</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group label-floating">
+											<label class="control-label">Commerciaux</label>
+											<select 
+												class="selectpicker selectCommercial fixIcon" 
+												data-style="select-with-transition" 
+												multiple 
+												title="Commerciaux" 
+												data-size="7"
+												name="commercials"
+												ngModel>4
+												<option disabled>Selectionnez les commerciaux en charge du projet</option>
+												<option *ngFor="let commercial of commercials" [value]="com?.$key">
+													{{ commercial?.firstName + ' ' + commercial?.lastName }}
+												</option>
+											</select>
+										</div>
+									</div>
+									<!-- <div *ngFor="let commercial of (commercials$ | async)">Paris </div>
+									<div *ngFor="let commercial of commercials">Paris </div>									 -->
+									
 								</div>
+
 
                                 <div class="">
                                     <div class="form-group label-floating">
@@ -93,6 +129,10 @@
                             <div class="clearfix"></div>
 
 						</div>
+
+						<pre>
+							{{ projectForm.value | json }}
+						</pre>
 
 				</div>
 

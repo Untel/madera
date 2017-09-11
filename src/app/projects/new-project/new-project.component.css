@@ -1,3 +1,11 @@
 .remove-btn {
     position: absolute;
 }
+
+.bootstrap-select.btn-group.show-tick .dropdown-menu li.selected a span.check-mark {
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+/* .main-content {
+    background-color: red;
+} */

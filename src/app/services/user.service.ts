@@ -15,15 +15,14 @@ export class UserService {
 
     constructor(private auth: AuthService, private af: AngularFire, ui: UiService) {
         this.user$ = this.auth.state$
-            .do(auth => auth ? this.userId = auth.uid : null)
+            .do( auth => auth ? this.userId = auth.uid : null)
             .filter( auth => !!auth )
-            .switchMap( auth => this.af.database.object(`/users/${auth.uid}`), (auth, user) => Object.assign({}, user, auth) );
+            .switchMap( auth => this.af.database.object(`/users/${auth.uid}`), ( auth, user ) => Object.assign({}, user, auth) );
 
         this.users$ = this.af.database.list('/users');
     }
 
     updateUser = (user: User) => {
-        console.log(user);
         return this.af.database.object(`/users/${this.userId}`).update(user);
     }
 
@@ -31,11 +30,20 @@ export class UserService {
         return this.af.database.object(`/users/${this.userId}/photo`).set(b64Img);
     }
 
-    getUsers = () => {
+    getUsers = () : Observable<User[]> => {
         return this.users$;
     }
 
-    getUsersByRole = (role: string) => {
-        return this.users$.filter(u => u.role === role);
+    getCommercials = () : Observable<User[]> => {
+        return this.getUsers()
+            .map(users => users.filter(u => u.role === 'commercial'))
+            .do(users => console.log('Commercials retrieved', users));
     }
+
+    getCustomers = () : Observable<User[]> => {
+        return this.getUsers()
+            .map(users => users.filter(u => u.role === 'customer'))
+            .do(users => console.log('Customers retrieved', users));            
+    }
+
 }

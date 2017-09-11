@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs/Rx';
 import { UiService } from '../services/ui.service';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
@@ -74,13 +75,13 @@ declare var $: any;
         @ViewChild('profilForm') form;
         @ViewChild('_img') _img: ResizingCroppingImages;
         user: User;
-        photo;
-        addMode: Boolean = false;
+
+        userSub: Subscription;
 
         constructor(private userService: UserService, private ui: UiService) { }
 
         ngOnInit() {
-            this.userService.user$.subscribe((user) => {
+            this.userSub = this.userService.user$.subscribe((user) => {
                 this.user = user;
             });
 
@@ -90,13 +91,14 @@ declare var $: any;
         }
 
         ngOnDestroy() {
-
+            this.userSub.unsubscribe();
         }
 
         onSubmit() {
 
             if (this.form.valid) {
-                this.userService.updateUser(this.form.value)
+                this.userService
+                    .updateUser(this.form.value)
                     .then( () => this.ui.success('Vos informations ont bien été enregistrées'))
                     .catch((err) => this.ui.danger('Une érreure s\'est produite'));
             } else {
