@@ -41,7 +41,6 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/distinct';
 import 'rxjs/add/operator/combineLatest';
-// import 'rxjs/add/operator/forkJoin';
 import 'rxjs/add/observable/forkJoin';
 
 
@@ -66,7 +65,6 @@ import 'rxjs/add/observable/forkJoin';
         UserService,
         UiService,
         AdminGuard,
-        // { provide: LocationStrategy, useClass: HashLocationStrategy },
     ],
     bootstrap:    [ AppComponent ]
 })

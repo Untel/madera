@@ -4,12 +4,12 @@
 
 ## Installation
 
-    git clone https://github.com/Untel/pfr
-    cd pfr\
+    git clone https://github.com/Untel/madera
+    cd madera\
     npm i -g @angular/cli typescript
     npm i
     ng serve
  
 ## Déploiement
 
-*Incoming*
+    npm run deploy
