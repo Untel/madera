@@ -13,11 +13,15 @@ export class UserService {
     public users$: FirebaseListObservable<User[]>;
     private userId;
 
-    constructor(private auth: AuthService, private af: AngularFire, ui: UiService) {
-        this.user$ = this.auth.state$
+    public connectedRole: String = 'none';
+
+    constructor(private authService: AuthService, private af: AngularFire, ui: UiService) {
+        this.user$ = this.authService.state$
             .do( auth => auth ? this.userId = auth.uid : null)
+            .do( () => this.connectedRole = 'none' )
             .filter( auth => !!auth )
-            .switchMap( auth => this.af.database.object(`/users/${auth.uid}`), ( auth, user ) => Object.assign({}, user, auth) );
+            .switchMap( auth => this.af.database.object(`/users/${auth.uid}`), ( auth, user: User ) => Object.assign({}, user, auth) )
+            .do( user => this.connectedRole = user.role );
 
         this.users$ = this.af.database.list('/users');
     }

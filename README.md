@@ -21,6 +21,7 @@ A faire au démarrage projet
     npm i -g firebase-tools
     firebase init
 
+Sélectionnez *hosting*
 Dans firebase.json
 
     {
