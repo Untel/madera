@@ -10,6 +10,12 @@ let sidebarTimer;
     moduleId: module.id,
     selector: 'sidebar-cmp',
     templateUrl: 'sidebar.component.html',
+    styles: [
+        `.sidebarpicture { 
+            left: 0 !important;
+            top: -100%;
+        }`
+    ]
 })
 
 export class SidebarComponent implements OnInit, AfterViewInit {
@@ -62,8 +68,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         }, 10);
     }
 }
-
-// The Moving Tab (the element that is moving on the sidebar, when you switch the pages) is depended on jQuery because it is doing a lot of calculations and changes based on Bootstrap collapse elements. If you have a better suggestion please send it to hello@creative-tim.com and we would be glad to talk more about this improvement. Thank you!
 
 const mda: any = {
     movingTab: '<div class="sidebar-moving-tab"/>',

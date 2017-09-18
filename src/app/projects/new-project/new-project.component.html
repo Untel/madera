@@ -1,0 +1,143 @@
+<div class="main-content">
+    <div class="container-fluid">
+		<div class="col-md-12">
+
+			<form (ngSubmit)="onSubmit(projectForm.value)" #projectForm="ngForm" >
+
+                <div class="card">
+
+                    <div class="card-header card-header-icon" data-background-color="blue">
+                        <i class="material-icons">apps</i>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Nouveau projet -
+                            <small class="category">Complétez les informations projets</small>
+                        </h4>
+
+
+                            <div class="col-md-8">
+
+								<div class="row">
+
+									<div class="col-md-8">
+										<div class="form-group label-floating">
+											<label class="control-label">Titre</label>
+											<input required 
+												minlength="2" 
+												ngModel
+												name="title" 
+												type="text" 
+												class="form-control"/> 
+										</div>
+									</div>
+
+									<div class="col-md-4">
+										<div class="form-group label-floating">
+											<label class="control-label">Clients</label>
+											<select 
+												class="selectpicker selectClient fixIcon" 
+												data-style="select-with-transition" 
+												title="Clients" 
+												data-size="7"
+												name="client"
+												ngModel>
+												<option disabled>Selectionnez les clients en liés à ce projet</option>
+												<option [value]="client?.$key"
+													*ngFor="let client of clients">
+													{{ client?.firstName + ' ' + client?.lastName }}
+												</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group label-floating">
+											<label class="control-label">Commerciaux</label>
+											<select 
+												class="selectpicker selectCommercial fixIcon" 
+												data-style="select-with-transition" 
+												multiple 
+												title="Commerciaux" 
+												data-size="7"
+												name="commercials"
+												ngModel>4
+												<option disabled>Selectionnez les commerciaux en charge du projet</option>
+												<option *ngFor="let commercial of commercials" [value]="commercial?.$key">
+													{{ commercial?.firstName + ' ' + commercial?.lastName }}
+												</option>
+											</select>
+										</div>
+									</div>
+									<!-- <div *ngFor="let commercial of (commercials$ | async)">Paris </div>
+									<div *ngFor="let commercial of commercials">Paris </div>									 -->
+									
+								</div>
+
+
+                                <div class="">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Description</label>
+										<textarea ngModel 
+											name="description" 
+											type="text" 
+											class="form-control"> 
+										</textarea>
+                                    </div>
+								</div>
+
+							</div>
+
+							<div class="col-md-4">
+								<div>
+									<span *ngIf="pictures.length === 0"></span>
+
+									<div *ngFor="let picture of pictures; let i = index">
+										<button 
+											(click)="removePicture(i)" 
+											class="btn btn-just-icon btn-simple btn-twitter remove-btn">
+											<i class="fa fa-times"></i>
+										</button>
+										<img [src]="picture" alt="">
+									</div>
+								</div>
+
+								<div class="text-center">
+									<span class="btn btn-rose btn-file">
+										<span class="fileinput-new">Ajouter une image</span>
+										<input (change)="onFileChange($event)" type="file">
+									</span>
+								</div>
+							</div>
+
+							<ly-cropping [style.display]="!_img.img?'none':'inherit'" #_img></ly-cropping>
+
+							<div class="text-center" *ngIf="_img.img">    
+
+								<button type="button" class="btn btn-just-icon btn-simple btn-sm" (click)="_img.zoom('+')">
+									<i class="material-icons">zoom_in</i>
+								</button>
+
+								<button type="button" class="btn btn-primary btn-sm" (click)="_img.center()">Centrer</button>
+								<button type="button" class="btn btn-success btn-sm" (click)="addPicture()">Ajouter</button>
+
+								<button type="button" class="btn btn-just-icon btn-simple btn-sm" (click)="_img.zoom('-')">
+									<i class="material-icons">zoom_out</i>										
+								</button>
+							</div>
+
+                            <div class="clearfix"></div>							
+                            <button type="submit" class="btn btn-info pull-right">Créer le projet</button>
+                            <div class="clearfix"></div>
+
+						</div>
+
+						<pre>
+							{{ projectForm.value | json }}
+						</pre>
+
+				</div>
+
+			</form>
+
+		</div>
+    </div>
+</div>

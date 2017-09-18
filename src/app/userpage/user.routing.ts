@@ -7,7 +7,7 @@ export const UserRoutes: Routes = [
 
       path: '',
       children: [ {
-        path: 'pages/user',
+        path: 'profil',
         component: UserComponent
     }]
 }
