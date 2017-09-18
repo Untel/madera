@@ -26,41 +26,34 @@ export class NewProjectComponent implements OnInit, OnDestroy {
     commercials: User[] = [];
     commercialsSub: Subscription;
 
-    customers$: Observable<User[]>;
-    customers: User[] = [];
-    customersSub: Subscription;
+    clients$: Observable<User[]>;
+    clients: User[] = [];
+    clientsSub: Subscription;
 
     constructor(private projectService: ProjectService, private userService: UserService) { }
 
     ngOnInit() {
-		this._img.sizeW = 400;
-        this._img.sizeH = 300;
+		this._img.sizeW = 483.33;
+        this._img.sizeH = 362;
 
         this.commercialsSub = this.userService
             .getCommercials()
             .subscribe(com => {
-                console.log('COMM', com[0]);
                 this.commercials = com;
-                console.log(this.commercials, 'this')
                 setTimeout(() => $(".selectCommercial").selectpicker(), 0);
             });
 
-        this.customersSub = this.userService
-            .getCustomers()
+        this.clientsSub = this.userService
+            .getClients()
             .subscribe(cus => {
-                this.customers = cus;
-                setTimeout(() => $(".selectCustomer").selectpicker(), 0);
+                this.clients = cus;
+                setTimeout(() => $(".selectClient").selectpicker(), 0);
             });
-
-        setTimeout(() => {
-            $('.bootstrap-select.btn-group.show-tick .dropdown-menu li.selected a span.check-mark')
-                .css('background-color', 'red');
-        }, 4000);
     }
 
     ngOnDestroy() {
         this.commercialsSub.unsubscribe();
-        this.customersSub.unsubscribe();
+        this.clientsSub.unsubscribe();
     }
 
     onSubmit(form) {
@@ -68,6 +61,8 @@ export class NewProjectComponent implements OnInit, OnDestroy {
         const project: Project = {
             title: form.title,
             description: form.description,
+            commercials: form.commercials,
+            client: form.client,
             pictures: this.pictures
         };
         this.projectService.createProject(project);

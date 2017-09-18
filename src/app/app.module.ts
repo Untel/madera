@@ -3,9 +3,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
-import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
+
+import {
+    APP_BASE_HREF,
+    LocationStrategy,
+    Location,
+    HashLocationStrategy
+} from '@angular/common';
 
 
 import { environment } from 'environments/environment';
@@ -34,6 +40,9 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/distinct';
+import 'rxjs/add/operator/combineLatest';
+// import 'rxjs/add/operator/forkJoin';
+import 'rxjs/add/observable/forkJoin';
 
 
 @NgModule({
@@ -57,6 +66,7 @@ import 'rxjs/add/operator/distinct';
         UserService,
         UiService,
         AdminGuard,
+        // { provide: LocationStrategy, useClass: HashLocationStrategy },
     ],
     bootstrap:    [ AppComponent ]
 })

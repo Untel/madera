@@ -40,10 +40,10 @@ export class UserService {
             .do(users => console.log('Commercials retrieved', users));
     }
 
-    getCustomers = () : Observable<User[]> => {
+    getClients = () : Observable<User[]> => {
         return this.getUsers()
-            .map(users => users.filter(u => u.role === 'customer'))
-            .do(users => console.log('Customers retrieved', users));            
+            .map(users => users.filter(u => u.role === 'client'))
+            .do(users => console.log('Clients retrieved', users));            
     }
 
 }

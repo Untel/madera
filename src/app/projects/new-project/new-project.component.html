@@ -35,16 +35,16 @@
 										<div class="form-group label-floating">
 											<label class="control-label">Clients</label>
 											<select 
-												class="selectpicker selectCustomer fixIcon" 
+												class="selectpicker selectClient fixIcon" 
 												data-style="select-with-transition" 
 												title="Clients" 
 												data-size="7"
-												name="customers"
+												name="client"
 												ngModel>
 												<option disabled>Selectionnez les clients en liés à ce projet</option>
-												<option [value]="customer?.$key"
-													*ngFor="let customer of customers">
-													{{ customer?.firstName + ' ' + customer?.lastName }}
+												<option [value]="client?.$key"
+													*ngFor="let client of clients">
+													{{ client?.firstName + ' ' + client?.lastName }}
 												</option>
 											</select>
 										</div>
@@ -61,7 +61,7 @@
 												name="commercials"
 												ngModel>4
 												<option disabled>Selectionnez les commerciaux en charge du projet</option>
-												<option *ngFor="let commercial of commercials" [value]="com?.$key">
+												<option *ngFor="let commercial of commercials" [value]="commercial?.$key">
 													{{ commercial?.firstName + ' ' + commercial?.lastName }}
 												</option>
 											</select>
@@ -112,14 +112,14 @@
 
 							<div class="text-center" *ngIf="_img.img">    
 
-								<button class="btn btn-just-icon btn-simple btn-sm" (click)="_img.zoom('+')">
+								<button type="button" class="btn btn-just-icon btn-simple btn-sm" (click)="_img.zoom('+')">
 									<i class="material-icons">zoom_in</i>
 								</button>
 
 								<button type="button" class="btn btn-primary btn-sm" (click)="_img.center()">Centrer</button>
 								<button type="button" class="btn btn-success btn-sm" (click)="addPicture()">Ajouter</button>
 
-								<button class="btn btn-just-icon btn-simple btn-sm" (click)="_img.zoom('-')">
+								<button type="button" class="btn btn-just-icon btn-simple btn-sm" (click)="_img.zoom('-')">
 									<i class="material-icons">zoom_out</i>										
 								</button>
 							</div>
