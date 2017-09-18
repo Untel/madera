@@ -1,3 +1,5 @@
+import { AuthService } from '../../services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UiService } from '../../services/ui.service';
@@ -30,7 +32,26 @@ export class NewProjectComponent implements OnInit, OnDestroy {
     clients: User[] = [];
     clientsSub: Subscription;
 
-    constructor(private projectService: ProjectService, private userService: UserService) { }
+    id: string;
+    mode: string = 'view';
+
+    constructor(
+        private projectService: ProjectService,
+        private userService: UserService,
+        private authService: AuthService,        
+        private route: ActivatedRoute
+    ) {
+        this.id = this.route.snapshot.params['id'] || null;
+        
+        if (!this.id) {
+            this.mode = 'new';
+        } else if (this.userService.connectedRole === 'commercial') {
+            this.mode = 'edit';
+        } else {
+            this.mode = 'view';
+        }
+        console.log(this.mode);
+    }
 
     ngOnInit() {
 		this._img.sizeW = 483.33;

@@ -8,7 +8,7 @@ export const ProjectsRoutes: Routes = [
         path: 'projects',
         component: ProjectsComponent,
     }, {
-        path: 'new-project',
+        path: 'new-project/:id',
         component: NewProjectComponent
     }
 ];
