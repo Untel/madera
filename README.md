@@ -1,6 +1,9 @@
 # Projet fil rouge CESI BREST
 
-*CAM : Équipe projet fil rouge composé de Clément DEBOOS, Adrien FERNANDES et Max-André LEROY*
+*CAM : Équipe projet fil rouge composé de Clément DEBOOS, Max-André LEROY et Adrien FERNANDES*
+
+## Live preview
+    https://madera-8ef40.firebaseapp.com/projects
 
 ## Installation
 
@@ -11,6 +14,7 @@
     ng serve
  
 ## Déploiement
+
 A faire au démarrage projet
 
     cd madera
@@ -18,6 +22,7 @@ A faire au démarrage projet
     firebase init
 
 Dans firebase.json
+
     {
         "hosting": {
             "public": "dist",
@@ -29,10 +34,11 @@ Dans firebase.json
     }
 
 Dans .firebaserc
+
     {
-    "projects": {
-        "default": "madera-8ef40"
-    }
+        "projects": {
+            "default": "madera-8ef40"
+        }
     }
 
     npm run deploy
