@@ -17,7 +17,7 @@
                             <button type="button" class="btn btn-default btn-simple" rel="tooltip" data-placement="bottom" title="View">
                                 <i class="material-icons">art_track</i>
                             </button>
-                            <button type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Edit">
+                            <button [routerLink]="'/new-project/' + project.$key" type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Edit">
                                 <i class="material-icons">edit</i>
                             </button>
                             <button (click)="removeProject(project)" type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Remove">

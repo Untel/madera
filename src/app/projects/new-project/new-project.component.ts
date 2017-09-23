@@ -22,7 +22,9 @@ export class NewProjectComponent implements OnInit, OnDestroy {
     // @ViewChild('projectForm') form;
     @ViewChild('_img') _img: ResizingCroppingImages;
 
-    pictures: string[] = [];
+    project$: Observable<Project>;
+    project: Project;
+    projectSub: Subscription;
 
     commercials$: Observable<User[]>;
     commercials: User[] = [];
@@ -32,30 +34,35 @@ export class NewProjectComponent implements OnInit, OnDestroy {
     clients: User[] = [];
     clientsSub: Subscription;
 
-    id: string;
-    mode: string = 'view';
+    idProject: string;
+    mode: string;
 
     constructor(
         private projectService: ProjectService,
         private userService: UserService,
-        private authService: AuthService,        
         private route: ActivatedRoute
     ) {
-        this.id = this.route.snapshot.params['id'] || null;
-        
-        if (!this.id) {
-            this.mode = 'new';
-        } else if (this.userService.connectedRole === 'commercial') {
-            this.mode = 'edit';
-        } else {
+        // this.idProject = this.route.snapshot.params['id'] || null;
+        this.project$ = this.route.snapshot.data['project'];
+
+        if (this.idProject) {
             this.mode = 'view';
+        } else {
+            this.mode = 'new';
         }
-        console.log(this.mode);
     }
 
     ngOnInit() {
 		this._img.sizeW = 483.33;
         this._img.sizeH = 362;
+
+        if (this.mode !== 'new' && this.idProject) {
+            this.projectSub = this.project$
+                .subscribe(project => {
+                    this.project = project;
+                    setTimeout(() => $(".selectpicker").selectpicker(), 0);
+                });
+        }
 
         this.commercialsSub = this.userService
             .getCommercials()
@@ -75,6 +82,7 @@ export class NewProjectComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.commercialsSub.unsubscribe();
         this.clientsSub.unsubscribe();
+        this.projectSub.unsubscribe();
     }
 
     onSubmit(form) {
@@ -84,7 +92,7 @@ export class NewProjectComponent implements OnInit, OnDestroy {
             description: form.description,
             commercials: form.commercials,
             client: form.client,
-            pictures: this.pictures
+            pictures: this.project.pictures
         };
         this.projectService.createProject(project);
     }
@@ -92,14 +100,14 @@ export class NewProjectComponent implements OnInit, OnDestroy {
    	addPicture() {
 		const b64img = this._img.imgCrop;
 
-		this.pictures.push(b64img);
+		this.project.pictures.push(b64img);
 
         this._img.img = null;
 		this._img.imgCrop = null;
     }
 
     removePicture(index) {
-        this.pictures.splice(index, 1);
+        this.project.pictures.splice(index, 1);
     }
 
     onFileChange($event) {
