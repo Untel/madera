@@ -15,9 +15,8 @@
  
 ## Déploiement
 
-A faire au démarrage projet
-
     cd madera
     npm i -g firebase-tools
+
 
     npm run deploy
