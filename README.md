@@ -3,7 +3,7 @@
 *CAM : Équipe projet fil rouge composé de Clément DEBOOS, Max-André LEROY et Adrien FERNANDES*
 
 ## Live preview
-    https://madera-8ef40.firebaseapp.com/projects
+    https://madera-8ef40.firebaseapp.com/
 
 ## Installation
 
@@ -11,7 +11,7 @@
     cd madera
     npm i -g @angular/cli ts-node
     npm i
-    ng serve
+    ng serve -o
  
 ## Déploiement
 
@@ -19,27 +19,5 @@ A faire au démarrage projet
 
     cd madera
     npm i -g firebase-tools
-    firebase init
-
-Sélectionnez *hosting*
-Dans firebase.json
-
-    {
-        "hosting": {
-            "public": "dist",
-            "rewrites": [ {
-                "source": "**",
-                "destination": "/index.html"
-            } ]
-        }
-    }
-
-Dans .firebaserc
-
-    {
-        "projects": {
-            "default": "madera-8ef40"
-        }
-    }
 
     npm run deploy

@@ -17,21 +17,25 @@ export class ProjectService {
 		this.ref = this.af.database.list('/projects');
 	}
 
-	createProject(project: Project) {
-		this.ref
+	createProject(project: Project): Promise<Project> {
+		return this.ref
 			.push(project)
 			.then(p => this.ui.success('Le projet à bien été ajouté!'))
 			.catch(e => this.ui.danger(`Le projet n'à pas pu être ajouté`));
 	}
 
-	removeProject(project: Project) {
+	removeProject(project: Project): void {
 		this.af.database.object(`/projects/${project.$key}`)
 			.remove()
 			.then(p => this.ui.success('Le projet à bien été supprimé!'))
 			.catch(e => this.ui.danger(`Le projet n'à pas pu être supprimé`));
 	}
 
-	getProjects() {
+	getProject(idProject: String): Observable<Project> {
+		return this.af.database.object(`/projects/${idProject}`);
+	}
+
+	getProjects(): Observable<Project[]> {
 		return this.ref;
 	}
 

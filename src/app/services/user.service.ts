@@ -13,15 +13,11 @@ export class UserService {
     public users$: FirebaseListObservable<User[]>;
     private userId;
 
-    public connectedRole: String = 'none';
-
     constructor(private authService: AuthService, private af: AngularFire, ui: UiService) {
         this.user$ = this.authService.state$
             .do( auth => auth ? this.userId = auth.uid : null)
-            .do( () => this.connectedRole = 'none' )
             .filter( auth => !!auth )
-            .switchMap( auth => this.af.database.object(`/users/${auth.uid}`), ( auth, user: User ) => Object.assign({}, user, auth) )
-            .do( user => this.connectedRole = user.role );
+            .switchMap( auth => this.af.database.object(`/users/${auth.uid}`), ( auth, user: User ) => Object.assign({}, user, auth) );
 
         this.users$ = this.af.database.list('/users');
     }
@@ -47,7 +43,7 @@ export class UserService {
     getClients = () : Observable<User[]> => {
         return this.getUsers()
             .map(users => users.filter(u => u.role === 'client'))
-            .do(users => console.log('Clients retrieved', users));            
+            .do(users => console.log('Clients retrieved', users));
     }
 
 }
