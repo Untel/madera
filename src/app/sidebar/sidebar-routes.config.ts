@@ -7,11 +7,11 @@ export const ROUTES: RouteInfo[] = [
         iconType: 'user', 
         iconName: '' 
     }, { 
-        path: '/dashboard', 
-        title: 'Accueil', 
-        iconType: 'material-icons', 
-        iconName: 'dashboard' 
-    }, { 
+    //     path: '/dashboard', 
+    //     title: 'Accueil', 
+    //     iconType: 'material-icons', 
+    //     iconName: 'dashboard' 
+    // }, { 
         path: '/projects', 
         title: 'Projets', 
         iconType: 'material-icons', 

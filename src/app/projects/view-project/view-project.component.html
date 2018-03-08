@@ -1,24 +1,212 @@
 <div class="main-content">
     <div class="container-fluid">
-		<div class="col-md-12">
 
-			<div class="card">
+			<div class="col-md-4">
+				<div class="card">
 
-				<div class="card-header card-header-icon" data-background-color="blue">
-					<i class="material-icons">apps</i>
+					
+					<div class="card-header card-header-icon" data-background-color="blue">
+						<i class="material-icons">apps</i>
+					</div>
+					<div class="card-content">
+						<h4 class="card-title">
+							{{ project?.title }}
+						</h4>
+						
+						
+						<small>
+							{{ project?.description }}
+						</small>
+						
+						<div>
+							<b>Commercial en charge:</b> Adrien Fernandes
+						</div>
+						
+						<div>
+							<b>Client:</b> Max Andre Leroy
+						</div>
+						
+					</div>
+					
 				</div>
-				<div class="card-content">
-					<h4 class="card-title">
-						{{ project?.title }}
-					</h4>
+				
+				<div class="card">
+					
+					<div class="card-header card-header-icon" data-background-color="orange">
+						<i class="material-icons">hourglass_empty</i>
+					</div>
+					<div class="card-content">
+						<h4 class="card-title">
+							État d'avancement
+						</h4>
+						
+						<ul class="timeline timeline-simple">
+								<li class="timeline-inverted">
+									<div class="timeline-badge success">
+										<i class="material-icons">done</i>
+									</div>
+									<div class="timeline-panel">
+										<div class="timeline-heading">
+											<span class="label label-success">Signature du devis</span>
+										</div>
+										<div class="timeline-body">
+											<p>Accordé il y a 6 jours par Adrien Fernandes</p>
+										</div>
+									</div>
+								</li>
+								<li class="timeline-inverted">
+									<div class="timeline-badge info">
+										<i class="material-icons">autorenew</i>
+									</div>
+									<div class="timeline-panel">
+										<div class="timeline-heading">
+											<span class="label label-info">Obtention du permis de construire</span>
+										</div>
+										<div class="timeline-body">
+											<p>En cours...</p>
+										</div>
+									</div>
+								</li>
+								<li class="timeline-inverted">
+									<div class="timeline-badge danger">
+										<i class="material-icons">close</i>
+									</div>
+									<div class="timeline-panel">
+										<div class="timeline-heading">
+											<span class="label label-danger">Ouverture du chantier</span>
+										</div>
+									</div>
+								</li>
+								<li class="timeline-inverted">
+									<div class="timeline-badge danger">
+										<i class="material-icons">close</i>
+									</div>
+									<div class="timeline-panel">
+										<div class="timeline-heading">
+											<span class="label label-danger">Achèvement des fondations</span>
+										</div>
+									</div>
+								</li>
+								<li class="timeline-inverted">
+									<div class="timeline-badge danger">
+										<i class="material-icons">close</i>
+									</div>
+									<div class="timeline-panel">
+										<div class="timeline-heading">
+											<span class="label label-danger">Achèvement des murs</span>
+										</div>
+									</div>
+								</li>
+								<li class="timeline-inverted">
+									<div class="timeline-badge danger">
+										<i class="material-icons">close</i>
+									</div>
+									<div class="timeline-panel">
+										<div class="timeline-heading">
+											<span class="label label-danger">Mise hors d'eau / hors d'air</span>
+										</div>
+									</div>
+								</li>
+								<li class="timeline-inverted">
+									<div class="timeline-badge danger">
+										<i class="material-icons">close</i>
+									</div>
+									<div class="timeline-panel">
+										<div class="timeline-heading">
+											<span class="label label-danger">Mise à jours des travaux d'équipements</span>
+										</div>
+									</div>
+								</li>
+								<li class="timeline-inverted">
+									<div class="timeline-badge danger">
+										<i class="material-icons">vpn_key</i>
+									</div>
+									<div class="timeline-panel">
+										<div class="timeline-heading">
+											<span class="label label-danger">Remise des clefs</span>
+										</div>
+									</div>
+								</li>
+							</ul>
+						
+					</div>
+					
+				</div>
+			</div>
+			
+			<div class="col-md-8">
+				
+				<div class="card">
+					
+					<div class="card-header card-header-icon" data-background-color="purple">
+						<i class="material-icons">format_align_center</i>
+					</div>
+					<div class="card-content">
+						<h4 class="card-title">
+							Devis
+						</h4>
+						
+						<p>
+							SAS Madera<br/>
+							2 Avenue de Provence,
+							29200 Brest,
+						</p>
+						
+						<p>
+							Monsieur Max Andre Leroy
+							3 rue latouche tréville,
+							29200 Brest
+						</p>
+						
+						<div>
+							<b>Référence devis:</b> 1234567
+						</div>
 
-					<small>
-						{{ project?.description }}
-					</small>
+						<h5>Modules</h5>
+						<div class="content table-responsive">
+							<table class="table">
+								<thead>
+									
+								</thead>
+								<tbody>
+									<th class="text-center" *ngFor="let row of modulesTable.headerRow">{{ row }}</th>
+									<tr *ngFor="let row of modulesTable.dataRows">
+										<td>{{ row[0] }}</td>
+										<td class="text-center">{{ row[1] }}</td>
+										<td class="text-center">{{ row[2] }}</td>
+										<td class="text-center">{{ row[3] }}</td>
+										<td class="text-center">{{ row[3] * row[2] }}€</td>
+									</tr>
+									<tr>
+										<td colspan="4" class="text-right">Total:</td>
+										<td class="text-center"><b>{{ getPrice() }}€</b></td>
+									</tr>
+								</tbody>
+							</table>
+						
+						</div>
+							
+		
+					</div>
+				</div>
+
+				<div class="card">
+					<div class="card-header card-header-icon" data-background-color="green">
+						<i class="material-icons">build</i>
+					</div>
+					<div class="card-content">
+						<h4 class="card-title">
+							Actions
+						</h4>
+
+						<button class="btn btn-default">Imprimer</button>
+						<button class="btn btn-warning">Demander une révision</button>
+						<button class="btn btn-success">Valider ce devis</button>					
+						
+					</div>
 				</div>
 
 			</div>
 
-		</div>
     </div>
 </div>

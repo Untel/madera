@@ -10,11 +10,13 @@ import { FormsModule } from '@angular/forms';
 
 import { LyResizingCroppingImageModule } from 'alyle-ui/resizing-cropping-images';
 import { ViewProjectComponent } from './view-project/view-project.component';
+import { MdModule } from '../md/md.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    MdModule,
     RouterModule.forChild(ProjectsRoutes),
     LyResizingCroppingImageModule
   ],

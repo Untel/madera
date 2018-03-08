@@ -8,7 +8,7 @@ import { AdminGuard } from './layouts/admin/admin.guard';
 export const AppRoutes: Routes = [
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'profil',
       pathMatch: 'full',
     },
     {
