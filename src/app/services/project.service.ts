@@ -35,6 +35,10 @@ export class ProjectService {
 		return this.ref;
 	}
 
+	getProject(id: number) {
+		return this.af.database.object('/projects/' + id);
+	}
+
 	getProjectsWithActors(): Observable<Project[]> {
 		return Observable
 			.combineLatest(

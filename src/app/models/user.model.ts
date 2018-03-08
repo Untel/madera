@@ -1,14 +1,14 @@
 export interface User {
-    displayName: string;
-    photo: string;
+    photo?: string;
     role: string;
 
     uid: string;
 
     firstName: string;
     lastName: string;
-    email: string;
-    phone: string;
+    email?: string;
+    phone?: string;
+    displayName?: string;
 
     $key?: string;
     $exists?: any;

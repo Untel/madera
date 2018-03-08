@@ -42,7 +42,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                        <form method="#" action="#">
+                        <form #loginForm="ngForm" method="#" action="#">
                             <div class="card card-login card-hidden">
                                 <div id="cardHeader" style="" class="card-header text-center" data-background-color="green">
                                     <h4 class="card-title">{{ ( errorMessage ? 'Erreur' : 'Connexion') }}</h4>
@@ -96,6 +96,7 @@
                                     </div>
                                     <div class="footer text-center">
                                         <button type="submit" class="btn btn-primary btn-simple btn-wd btn-lg">Se connecter</button>
+                                        <button class="btn btn-danger btn-simple btn-wd btn-lg" (click)="fillFakeData()">Réinitialiser la BDD</button>
                                     </div>
                                 </form>
                             </div>
@@ -138,5 +139,6 @@
                 </p>
             </div>
         </footer>-->
+
     </div>
 </div>

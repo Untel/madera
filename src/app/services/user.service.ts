@@ -43,7 +43,7 @@ export class UserService {
     getClients = () : Observable<User[]> => {
         return this.getUsers()
             .map(users => users.filter(u => u.role === 'client'))
-            .do(users => console.log('Clients retrieved', users));            
+            .do(users => console.log('Clients retrieved', users));
     }
 
 }

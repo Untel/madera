@@ -9,6 +9,7 @@ import { ProjectService } from '../services/project.service';
 import { FormsModule } from '@angular/forms';
 
 import { LyResizingCroppingImageModule } from 'alyle-ui/resizing-cropping-images';
+import { ViewProjectComponent } from './view-project/view-project.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { LyResizingCroppingImageModule } from 'alyle-ui/resizing-cropping-images
     RouterModule.forChild(ProjectsRoutes),
     LyResizingCroppingImageModule
   ],
-  declarations: [ProjectsComponent, NewProjectComponent],
+  declarations: [ProjectsComponent, NewProjectComponent, ViewProjectComponent],
   providers: [ ProjectService ]
 })
 export class ProjectsModule { }

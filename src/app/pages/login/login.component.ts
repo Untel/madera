@@ -23,6 +23,10 @@ export class LoginComponent implements OnInit{
 
     constructor( private auth: AuthService, private router: Router ) { }
 
+    fillFakeData() {
+        this.auth.fillFakeData();
+    }
+
     loginWithCredentials({ email, password }) {
         this.auth.loginWithCredentials(email, password).then((state) => {
             this.router.navigateByUrl('/dashboard');
