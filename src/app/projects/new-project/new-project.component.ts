@@ -30,6 +30,15 @@ export class NewProjectComponent implements OnInit, OnDestroy {
     clients: User[] = [];
     clientsSub: Subscription;
 
+    modulesTable = {
+        headerRow: ['Module', 'Ref', 'Gamme', 'Quantité', 'Prix/U', 'Total'],
+        dataRows: [
+            { name: 'Mur extérieur bois/crépis', gamme: 'Éco.', reference: '912345', quantity: 0, price: 1599.99 },
+            { name: 'Mur intérieur x', gamme: 'Éco.', reference: '894545', quantity: 0, price: 1285.99 },
+            { name: 'Plafond x50m² bois/crépis', gamme: 'Éco.', reference: '454588', quantity: 0, price: 1000.99 },
+        ]
+     };
+
     constructor(private projectService: ProjectService, private userService: UserService) { }
 
     ngOnInit() {
@@ -63,7 +72,8 @@ export class NewProjectComponent implements OnInit, OnDestroy {
             description: form.description,
             commercials: form.commercials,
             client: form.client,
-            pictures: this.pictures
+            pictures: this.pictures,
+            modules: this.modulesTable.dataRows,
         };
         this.projectService.createProject(project);
     }
@@ -83,6 +93,19 @@ export class NewProjectComponent implements OnInit, OnDestroy {
 
     onFileChange($event) {
 		this._img.imgChange($event);
+    }
+
+    getPrice() {
+        return this.modulesTable.dataRows.reduce((prev, next) => {
+          return prev + (next.quantity * next.price);
+        }, 0);
+    }
+
+    add(ref, amount) {
+        if (amount < 0 && ref.quantity <= 0) {
+            return;
+        }
+        ref.quantity += amount;
     }
 
 }

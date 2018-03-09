@@ -42,7 +42,6 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/distinct';
 import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/observable/forkJoin';
-import { ViewProjectComponent } from './view-project/view-project.component';
 
 
 @NgModule({
@@ -60,7 +59,6 @@ import { ViewProjectComponent } from './view-project/view-project.component';
         AppComponent,
         AdminLayoutComponent,
         AuthLayoutComponent,
-        ViewProjectComponent,
     ],
     providers: [
         AuthService,

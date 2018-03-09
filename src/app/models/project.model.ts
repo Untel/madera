@@ -6,13 +6,15 @@ export interface Project {
     description: string;
     pictures: string[];
 
-    devis?: any[];
+    reference?: string;
 
     commercials?: string[];
     client?: string;
 
     $commercials?: User[];
     $client?: User;
+
+    modules?: Array<any>;
 
     $key?: string;
     $exists?: any;

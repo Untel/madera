@@ -29,13 +29,13 @@ export class LoginComponent implements OnInit{
 
     loginWithCredentials({ email, password }) {
         this.auth.loginWithCredentials(email, password).then((state) => {
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/');
         }).catch(err => this.displayError(err) );
     }
 
     loginWithGoogle() {
         this.auth.loginWithGoogle().then(() => {
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/');
         }).catch(err => this.displayError(err) );
     }
 

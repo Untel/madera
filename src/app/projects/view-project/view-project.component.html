@@ -145,18 +145,22 @@
 						<h4 class="card-title">
 							Devis
 						</h4>
+
+						<div class="col-md-6">
+							<p>
+								SAS Madera<br/>
+								2 Avenue de Provence,<br/>
+								29200 Brest,
+							</p>
+						</div>
+						<div class="col-md-6">
+							<p>
+								Monsieur Max Andre Leroy<br/>
+								3 rue latouche tréville,<br/>
+								29200 Brest
+							</p>
+						</div>
 						
-						<p>
-							SAS Madera<br/>
-							2 Avenue de Provence,
-							29200 Brest,
-						</p>
-						
-						<p>
-							Monsieur Max Andre Leroy
-							3 rue latouche tréville,
-							29200 Brest
-						</p>
 						
 						<div>
 							<b>Référence devis:</b> 1234567
@@ -169,17 +173,18 @@
 									
 								</thead>
 								<tbody>
-									<th class="text-center" *ngFor="let row of modulesTable.headerRow">{{ row }}</th>
-									<tr *ngFor="let row of modulesTable.dataRows">
-										<td>{{ row[0] }}</td>
-										<td class="text-center">{{ row[1] }}</td>
-										<td class="text-center">{{ row[2] }}</td>
-										<td class="text-center">{{ row[3] }}</td>
-										<td class="text-center">{{ row[3] * row[2] }}€</td>
+									<th class="text-center" *ngFor="let row of headerRow">{{ row }}</th>
+									<tr *ngFor="let row of project?.modules">
+										<td>{{ row.name }}</td>
+										<td class="text-center">{{ row.reference }}</td>
+										<td class="text-center">{{ row.gamme }}</td>
+										<td class="text-center">{{ row.quantity }}</td>
+										<td class="text-center">{{ row.price | number:'3.1-5':'fr' }}€</td>
+										<td class="text-right">{{ row.price * row.quantity | number:'3.1-5':'fr' }}€</td>
 									</tr>
 									<tr>
-										<td colspan="4" class="text-right">Total:</td>
-										<td class="text-center"><b>{{ getPrice() }}€</b></td>
+										<td colspan="5" class="text-right">Total:</td>
+										<td class="text-right"><b>{{ getPrice() | number:'3.1-5':'fr' }}€</b></td>
 									</tr>
 								</tbody>
 							</table>

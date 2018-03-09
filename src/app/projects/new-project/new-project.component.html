@@ -33,11 +33,23 @@
 
 									<div class="col-md-4">
 										<div class="form-group label-floating">
-											<label class="control-label">Clients</label>
+											<label class="control-label">Réference</label>
+											<input required 
+												minlength="2" 
+												ngModel
+												name="reference"
+												type="text"
+												class="form-control"/> 
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group label-floating">
+											<label class="control-label">Client</label>
 											<select 
 												class="selectpicker selectClient fixIcon" 
 												data-style="select-with-transition" 
-												title="Clients" 
+												title="Client" 
 												data-size="7"
 												name="client"
 												ngModel>
@@ -49,9 +61,9 @@
 											</select>
 										</div>
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<div class="form-group label-floating">
-											<label class="control-label">Commerciaux</label>
+											<label class="control-label">Commercial</label>
 											<select 
 												class="selectpicker selectCommercial fixIcon" 
 												data-style="select-with-transition" 
@@ -60,7 +72,7 @@
 												data-size="7"
 												name="commercials"
 												ngModel>4
-												<option disabled>Selectionnez les commerciaux en charge du projet</option>
+												<option disabled>Selectionnez le ou les commerciaux en charge du projet</option>
 												<option *ngFor="let commercial of commercials" [value]="commercial?.$key">
 													{{ commercial?.firstName + ' ' + commercial?.lastName }}
 												</option>
@@ -76,12 +88,43 @@
                                 <div class="">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Description</label>
-										<textarea ngModel 
-											name="description" 
-											type="text" 
+										<textarea ngModel
+											name="description"
+											rows="4"
 											class="form-control"> 
 										</textarea>
                                     </div>
+								</div>
+
+								<div class="content table-responsive">
+									<table class="table">
+										<thead>
+											
+										</thead>
+										<tbody>
+											<th class="text-center" *ngFor="let header of modulesTable.headerRow">{{ header }}</th>
+											<tr *ngFor="let row of modulesTable.dataRows">
+												<td>{{ row.name }}</td>
+												<td class="text-center">{{ row.reference }}</td>
+												<td class="text-center">{{ row.gamme }}</td>
+												<td class="text-center">
+													<span (click)="add(row, -1)" class="btn btn-danger btn-simple btn-xs">
+														<i class="material-icons">remove</i>
+													</span>
+													{{ row.quantity }}
+													<span (click)="add(row, 1)" class="btn btn-success btn-simple btn-xs">
+														<i class="material-icons">add</i>
+													</span>
+												</td>
+												<td class="text-center">{{ row.price }}€</td>
+												<td class="text-center">{{ row.quantity * row.price | number:'3.1-5':'fr' }}€</td>
+											</tr>
+											<tr>
+												<td colspan="5" class="text-right">Total:</td>
+												<td class="text-center"><b>{{ getPrice() | number:'3.1-5':'fr' }}€</b></td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
 
 							</div>
@@ -130,9 +173,9 @@
 
 						</div>
 
-						<pre>
+						<!-- <pre>
 							{{ projectForm.value | json }}
-						</pre>
+						</pre> -->
 
 				</div>
 

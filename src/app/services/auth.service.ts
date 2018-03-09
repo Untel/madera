@@ -67,8 +67,14 @@ export class AuthService {
         const project: Project = {
             title: 'Maison 7 pièces',
             pictures: ['/assets/img/background-1.jpg'],
-            description: 'Maison pour M. Fernandes. Sans plus de commentaire.',
+            description: 'Maison pour M. Leroy.',
             commercials: ['i1jIvHDB93cE3SEqtM29Mb8rpd93'],
+            reference: 'D918273465',
+            modules: [
+                { name: 'Mur extérieur bois/crépis', gamme: 'Éco.', reference: '912345', quantity: 8, price: 599.99 },
+                { name: 'Mur intérieur bois/crépis', gamme: 'Éco.', reference: '894545', quantity: 6, price: 285.99 },
+                { name: 'Plafond x50m² bois/crépis', gamme: 'Éco.', reference: '454588', quantity: 7, price: 351.99 },
+            ],
             client: 'wYnDeaWp81hjzBInhj1ipTgvR8P2'
         }
         projects.push(project);
