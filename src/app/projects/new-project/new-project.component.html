@@ -3,7 +3,7 @@
 		<div class="col-md-12">
 
 			<form (ngSubmit)="onSubmit(projectForm.value)" #projectForm="ngForm" >
-
+				<pre>{{project | json}}</pre>
                 <div class="card">
 
                     <div class="card-header card-header-icon" data-background-color="blue">
@@ -18,13 +18,15 @@
                             <div class="col-md-8">
 
 								<div class="row">
+									form: {{ projectForm?.controls?.title?.value }}
+									project: {{ project?.title }}
 
 									<div class="col-md-8">
 										<div class="form-group label-floating">
 											<label class="control-label">Titre</label>
 											<input required 
 												minlength="2" 
-												ngModel
+												[(ngModel)]="project.title"
 												name="title" 
 												type="text" 
 												class="form-control"/> 
@@ -36,7 +38,7 @@
 											<label class="control-label">Réference</label>
 											<input required 
 												minlength="2" 
-												ngModel
+												[(ngModel)]="project.reference"
 												name="reference"
 												type="text"
 												class="form-control"/> 
@@ -49,10 +51,9 @@
 											<select 
 												class="selectpicker selectClient fixIcon" 
 												data-style="select-with-transition" 
-												title="Client" 
-												data-size="7"
+												title="Client"
 												name="client"
-												ngModel>
+												[(ngModel)]="project.client">
 												<option disabled>Selectionnez les clients en liés à ce projet</option>
 												<option [value]="client?.$key"
 													*ngFor="let client of clients">
@@ -69,9 +70,9 @@
 												data-style="select-with-transition" 
 												multiple 
 												title="Commerciaux" 
-												data-size="7"
+												data-size="2"
 												name="commercials"
-												ngModel>4
+												[(ngModel)]="project.commercials">
 												<option disabled>Selectionnez le ou les commerciaux en charge du projet</option>
 												<option *ngFor="let commercial of commercials" [value]="commercial?.$key">
 													{{ commercial?.firstName + ' ' + commercial?.lastName }}

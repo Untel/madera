@@ -14,13 +14,13 @@
                             <button type="button" class="btn btn-danger btn-simple fix-broken-card">
                                 <i class="material-icons">build</i> Réparer
                             </button>
-                            <a [routerLink]="'/view-project/' + project.$key" class="btn btn-default btn-simple" rel="tooltip" data-placement="bottom" title="Voir">
+                            <a [routerLink]="'/projects/view/' + project.$key" class="btn btn-default btn-simple" rel="tooltip" data-placement="bottom" title="Voir">
                                 <i class="material-icons">art_track</i>
                             </a>
-                            <!-- <button type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Edit">
+                            <a [routerLink]="'/projects/edit/' + project.$key" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Editer">
                                 <i class="material-icons">edit</i>
-                            </button> -->
-                            <button (click)="removeProject(project)" type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Remove">
+                            </a>
+                            <button (click)="removeProject(project)" type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Supprimer">
                                 <i class="material-icons">close</i>
                             </button>
                         </div>
@@ -52,7 +52,7 @@
                 <div class="card card-product">
                     <div class="card-content">
                         <h1 class="card-title">
-                            <a routerLink="/new-project">
+                            <a routerLink="/projects/new">
                                 <i class="fa fa-plus"></i>
                             </a>
                         </h1>

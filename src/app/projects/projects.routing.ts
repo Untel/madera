@@ -6,13 +6,16 @@ import { ViewProjectComponent } from './view-project/view-project.component';
 
 export const ProjectsRoutes: Routes = [
     {
-        path: 'projects',
+        path: '',
         component: ProjectsComponent,
     }, {
-        path: 'new-project',
+        path: 'new',
         component: NewProjectComponent
     }, {
-        path: 'view-project/:id',
+        path: 'edit/:id',
+        component: NewProjectComponent
+    }, {
+        path: 'view/:id',
         component: ViewProjectComponent
     }
 ];
