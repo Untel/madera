@@ -17,8 +17,8 @@ export class ProjectService {
 		this.ref = this.af.database.list('/projects');
 	}
 
-	createProject(project: Project) {
-		this.ref
+	createProject(project: Project): Promise<any> {
+		return this.ref
 			.push(project)
 			.then(p => this.ui.success('Le projet à bien été ajouté!'))
 			.catch(e => this.ui.danger(`Le projet n'à pas pu être ajouté`));

@@ -22,6 +22,18 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
     project$: Observable<Project>;
     project: Project = null;
 
+    step = 0;
+
+    steps = [
+      'Signature du devis',
+      "Obtention du permis de construire",
+      "Ouverture du chantier",
+      "Achèvement des fondations",
+      "Achèvement des murs",
+      "Mise hors d'eau / hors d'air",
+      "Mise à jours des travaux d'équipements",
+      "Remise des clefs",
+    ];
 
     headerRow = ['Module', 'Ref', 'Gamme', 'Quantité', 'Prix/U', 'Total'];
 
@@ -47,6 +59,10 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
           return prev + (next.quantity * next.price);
         }, 0);
       }
+    }
+
+    selectStep(i) {
+      this.step = i + 1;
     }
 
 }

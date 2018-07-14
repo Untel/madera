@@ -27,6 +27,8 @@ export class NewProjectComponent implements OnInit, OnDestroy, AfterViewInit {
     id: number = null;
     pictures: string[] = [];
 
+    submitting = false;
+
     commercials$: Observable<User[]>;
     commercials: User[] = [];
     commercialsSub: Subscription;
@@ -113,6 +115,7 @@ export class NewProjectComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     onSubmit(form) {
+        this.submitting = true;
         const project: Project = {
             title: form.title,
             description: form.description,
@@ -122,7 +125,9 @@ export class NewProjectComponent implements OnInit, OnDestroy, AfterViewInit {
             pictures: this.pictures,
             modules: this.modulesTable.dataRows,
         };
-        this.projectService.createProject(project);
+        this.projectService.createProject(project)
+            .then(() => this.router.navigateByUrl('/projects'))
+            .catch(() => this.submitting = false);
     }
 
    	addPicture() {
@@ -157,7 +162,15 @@ export class NewProjectComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
     addModule(mod) {
-        this.modulesTable.dataRows.push(Object.assign({}, mod, { quantity: 0}));
+        this.modulesTable.dataRows.push(Object.assign({}, {
+            name: mod.name,
+            description: mod.description,
+            price: mod.price,
+            type: mod.type,
+            reference: mod.reference,
+            gamme: mod.gamme,
+            quantity: 1
+        }));
     }
 
     deleteModule(index) {

@@ -41,93 +41,116 @@
 						</h4>
 						
 						<ul class="timeline timeline-simple">
-								<li class="timeline-inverted">
-									<div class="timeline-badge success">
-										<i class="material-icons">done</i>
+							<ng-container *ngFor="let s of steps; let i = index;">
+								<li *ngIf="step + 1 >= i || showMore" class="timeline-inverted">
+									<div class="timeline-badge"
+										[class.success]="step > i"
+										[class.danger]="step < i"
+										[class.info]="step === i"
+									>
+										<i class="material-icons">{{ step > i ? 'done' : ( step === i ? 'autorenew' : 'close') }}</i>
 									</div>
 									<div class="timeline-panel">
 										<div class="timeline-heading">
-											<span class="label label-success">Signature du devis</span>
+											<span class="label"
+												[class.label-success]="step > i"
+												[class.label-danger]="step < i"
+												[class.label-info]="step === i"
+											>{{ s }}</span>
 										</div>
-										<div class="timeline-body">
+										<!-- <div *ngIf="project.steps && project.steps[i]" class="timeline-body">
 											<p>Accordé il y a 6 jours par Adrien Fernandes</p>
+										</div> -->
+										<div class="timeline-body" *ngIf="step === i">
+											<button type="button" class="btn btn-success btn-small btn-mini" (click)="selectStep(i)">Valider</button>
 										</div>
 									</div>
 								</li>
-								<li class="timeline-inverted">
-									<div class="timeline-badge info">
-										<i class="material-icons">autorenew</i>
+							</ng-container>
+							<li *ngIf="step <= steps.length - 2" class="timeline-inverted">
+								<div class="timeline-badge success" style="cursor: pointer; background-color: #BBBB" (click)="showMore = !showMore">
+									<i class="material-icons"> {{ !showMore ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</i>
+								</div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
 									</div>
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<span class="label label-info">Obtention du permis de construire</span>
-										</div>
-										<div class="timeline-body">
-											<p>En cours...</p>
-										</div>
+								</div>
+							</li>
+						</ul>
+							<!-- <li class="timeline-inverted">
+								<div class="timeline-badge info">
+									<i class="material-icons">autorenew</i>
+								</div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<span class="label label-info">Obtention du permis de construire</span>
 									</div>
-								</li>
-								<li class="timeline-inverted">
-									<div class="timeline-badge danger">
-										<i class="material-icons">close</i>
+									<div class="timeline-body">
+										<p>En cours...</p>
 									</div>
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<span class="label label-danger">Ouverture du chantier</span>
-										</div>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-badge danger">
+									<i class="material-icons">close</i>
+								</div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<span class="label label-danger">Ouverture du chantier</span>
 									</div>
-								</li>
-								<li class="timeline-inverted">
-									<div class="timeline-badge danger">
-										<i class="material-icons">close</i>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-badge danger">
+									<i class="material-icons">close</i>
+								</div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<span class="label label-danger">Achèvement des fondations</span>
 									</div>
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<span class="label label-danger">Achèvement des fondations</span>
-										</div>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-badge danger">
+									<i class="material-icons">close</i>
+								</div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<span class="label label-danger">Achèvement des murs</span>
 									</div>
-								</li>
-								<li class="timeline-inverted">
-									<div class="timeline-badge danger">
-										<i class="material-icons">close</i>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-badge danger">
+									<i class="material-icons">close</i>
+								</div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<span class="label label-danger">Mise hors d'eau / hors d'air</span>
 									</div>
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<span class="label label-danger">Achèvement des murs</span>
-										</div>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-badge danger">
+									<i class="material-icons">close</i>
+								</div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<span class="label label-danger">Mise à jours des travaux d'équipements</span>
 									</div>
-								</li>
-								<li class="timeline-inverted">
-									<div class="timeline-badge danger">
-										<i class="material-icons">close</i>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-badge danger">
+									<i class="material-icons">vpn_key</i>
+								</div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<span class="label label-danger">Remise des clefs</span>
 									</div>
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<span class="label label-danger">Mise hors d'eau / hors d'air</span>
-										</div>
-									</div>
-								</li>
-								<li class="timeline-inverted">
-									<div class="timeline-badge danger">
-										<i class="material-icons">close</i>
-									</div>
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<span class="label label-danger">Mise à jours des travaux d'équipements</span>
-										</div>
-									</div>
-								</li>
-								<li class="timeline-inverted">
-									<div class="timeline-badge danger">
-										<i class="material-icons">vpn_key</i>
-									</div>
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<span class="label label-danger">Remise des clefs</span>
-										</div>
-									</div>
-								</li>
-							</ul>
+								</div>
+							</li>
+						</ul> -->
 						
 					</div>
 					
