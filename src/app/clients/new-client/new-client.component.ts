@@ -1,4 +1,4 @@
-import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { UiService } from '../../services/ui.service';
 // import { AuthService } from '../../services/auth.service
@@ -11,10 +11,10 @@ import { NgForm } from '@angular/forms';
 declare var $: any;
 
 @Component({
-  templateUrl: './new-module.component.html',
-  styleUrls: ['./new-module.component.css']
+  templateUrl: './new-client.component.html',
+  styleUrls: ['./new-client.component.css']
 })
-export class NewModuleComponent implements OnInit, OnDestroy, AfterViewInit {
+export class NewClientComponent implements OnInit, OnDestroy, AfterViewInit {
 
     submitting = false;
     public mod: any = {

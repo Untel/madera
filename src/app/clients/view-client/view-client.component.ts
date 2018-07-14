@@ -1,4 +1,4 @@
-import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UiService } from '../../services/ui.service';
 // import { AuthService } from '../../services/auth.service';
@@ -14,8 +14,8 @@ import { ActivatedRoute } from '@angular/router';
 declare var $: any;
 
 @Component({
-  templateUrl: './view-project.component.html',
-  styleUrls: ['./view-project.component.css']
+  templateUrl: './view-client.component.html',
+  styleUrls: ['./view-client.component.css']
 })
 export class ViewProjectComponent implements OnInit, OnDestroy {
 

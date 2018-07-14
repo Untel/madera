@@ -1,4 +1,4 @@
-import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs';
 import { UiService } from '../services/ui.service';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';

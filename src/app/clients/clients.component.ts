@@ -8,27 +8,24 @@ import { UiService } from '../services/ui.service';
 declare const $: any;
 declare const swal: any;
 @Component({
-	templateUrl: './modules.component.html',
-	styleUrls: ['./modules.component.css']
+	templateUrl: './clients.component.html',
+	styleUrls: ['./clients.component.css']
 })
-export class ModulesComponent implements OnInit, AfterViewInit {
+export class ClientsComponent implements OnInit, AfterViewInit {
 
-	modules: any[] = [];
+	clients: any[] = [];
 
 	constructor(private af: AngularFire, private ui: UiService) {}
 
 	public ngOnInit() {
-		this.af.database.list('/modules').subscribe((modules) => {
-			this.modules = modules;
-		});
 	}
 
 	public ngAfterViewInit() {
 	}
 
-	public removeModule(mod) {
+	public removeClient(mod) {
 		swal({
-			title: 'Êtes vous sur de vouloir supprimer ce module?',
+			title: 'Êtes vous sur de vouloir supprimer ce client?',
 			text: 'Cette action est définitive!',
 			type: 'warning',
 			showCancelButton: true,
@@ -39,10 +36,10 @@ export class ModulesComponent implements OnInit, AfterViewInit {
 			buttonsStyling: false
 		}).then((confirmed) => {
 			if (confirmed) {
-				this.af.database.object(`/modules/${mod.$key}`)
+				this.af.database.object(`/clients/${mod.$key}`)
 					.remove()
-					.then(p => this.ui.success('Le module à bien été supprimé!'))
-					.catch(e => this.ui.danger(`Le module n'à pas pu être supprimé`));
+					.then(p => this.ui.success('Le client à bien été supprimé!'))
+					.catch(e => this.ui.danger(`Le client n'à pas pu être supprimé`));
 			}
 		}).catch(() => {});
 	}

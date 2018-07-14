@@ -1,4 +1,4 @@
-import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UiService } from '../../services/ui.service';
 // import { AuthService } from '../../services/auth.service';

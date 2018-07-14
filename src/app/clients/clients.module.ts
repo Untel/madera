@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ModulesRoutes } from './modules.routing';
-import { NewModuleComponent } from './new-module/new-module.component';
+import { ClientsRoutes } from './clients.routing';
+import { NewClientComponent } from './new-client/new-client.component';
 import { FormsModule } from '@angular/forms';
 import { MdModule } from '../md/md.module';
-import { ModulesComponent } from './modules.component';
+import { ClientsComponent } from './clients.component';
 
 @NgModule({
   imports: [
     FormsModule,
     MdModule,
     CommonModule,
-    RouterModule.forChild(ModulesRoutes),
+    RouterModule.forChild(ClientsRoutes),
     CommonModule
   ],
-  declarations: [ModulesComponent, NewModuleComponent]
+  declarations: [ClientsComponent, NewClientComponent]
 })
-export class ModulesModule { }
+export class ClientsModule { }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer, ViewChild, ElementRef, Directive } from '@angular/core';
-import { ROUTES } from '../.././sidebar/sidebar-routes.config';
+import { ROUTES } from '../../sidebar/sidebar-routes.config';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
