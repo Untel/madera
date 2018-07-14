@@ -2,7 +2,7 @@
     <div class="container-fluid">
 		<div class="col-md-12">
 
-			<form (ngSubmit)="onSubmit(projectForm.value)" #projectForm="ngForm" >
+			<form (ngSubmit)="onSubmit(projectForm.value)" #projectForm="ngForm">
 				<!-- <pre>{{project | json}}</pre> -->
                 <div class="card">
 
@@ -79,8 +79,7 @@
 												</option>
 											</select>
 										</div>
-									</div>							 -->
-									
+									</div>
 								</div>
 
 
@@ -95,14 +94,15 @@
                                     </div>
 								</div>
 
-								<div class="content table-responsive">
+								<div class="content table-responsive" style="overflow: inherit; overflow-x: inherit;">
 									<table class="table">
 										<thead>
 											
 										</thead>
 										<tbody>
 											<th class="text-center" *ngFor="let header of modulesTable.headerRow">{{ header }}</th>
-											<tr *ngFor="let row of modulesTable.dataRows">
+											<th></th>
+											<tr *ngFor="let row of modulesTable.dataRows; let i = index">
 												<td>{{ row.name }}</td>
 												<td class="text-center">{{ row.reference }}</td>
 												<td class="text-center">{{ row.gamme }}</td>
@@ -117,15 +117,29 @@
 												</td>
 												<td class="text-center">{{ row.price }}€</td>
 												<td class="text-center">{{ row.quantity * row.price | number:'3.1-5':'fr' }}€</td>
+												<td class="text-center">
+													<span (click)="deleteModule(index)" class="btn btn-danger btn-simple btn-xs">
+														<i class="material-icons">clear</i>
+													</span>
+												</td>
 											</tr>
 											<tr>
 												<td>
-													<button type="button" class="btn btn-just-icon btn-simple btn-sm" (click)="addModule()">
-														<i class="material-icons">add</i> Module									
-													</button>
+													<div class="dropdown pull-left">
+														<button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
+															<i class="material-icons">add</i>
+															<span class="caret"></span>
+														</button>
+														<ul class="dropdown-menu dropdown-menu-right" role="menu">
+															<li *ngFor="let mod of modules">
+																<a href="javascript:void(0)" (click)="addModule(mod)">{{ mod.name }} - {{ mod.reference }}</a>																
+															</li>
+														</ul>
+													</div>
 												</td>
 												<td colspan="4" class="text-right">Total:</td>
 												<td class="text-center"><b>{{ getPrice() | number:'3.1-5':'fr' }}€</b></td>
+												<td></td>
 											</tr>
 										</tbody>
 									</table>
@@ -172,7 +186,7 @@
 							</div>
 
                             <div class="clearfix"></div>							
-                            <button type="submit" class="btn btn-info pull-right">Créer le projet</button>
+                            <button type="submit" class="btn btn-success pull-right">Sauvegarder</button>
                             <div class="clearfix"></div>
 
 						</div>

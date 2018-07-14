@@ -51,11 +51,7 @@ export class NewProjectComponent implements OnInit, OnDestroy, AfterViewInit {
 
     modulesTable = {
         headerRow: ['Module', 'Ref', 'Gamme', 'Quantité', 'Prix/U', 'Total'],
-        dataRows: [
-            { name: 'Mur extérieur bois/crépis', gamme: 'Éco.', reference: '912345', quantity: 0, price: 1599.99 },
-            { name: 'Mur intérieur x', gamme: 'Éco.', reference: '894545', quantity: 0, price: 1285.99 },
-            { name: 'Plafond x50m² bois/crépis', gamme: 'Éco.', reference: '454588', quantity: 0, price: 1000.99 },
-        ]
+        dataRows: []
     };
 
     constructor(
@@ -97,44 +93,26 @@ export class NewProjectComponent implements OnInit, OnDestroy, AfterViewInit {
             console.log('Has param')
             this.projectService.getProject(this.id).subscribe((project: Project) => {
                 if (project.$exists()) {
-                    console.log('Project found', project);
-                    console.log(this.form, this.form.form.controls, this.form.control.controls, this.form.controls['title'],
                     this.form.controls['title'],
                     this.form.controls['description'],
                     this.form.controls['commercials'],
                     this.form.controls['client'],
-                    this.form.controls['reference']);
-
+                    this.form.controls['reference'];
                     setTimeout(() => {
                         this.project = project;
                         setTimeout(() => $(".selectClient").selectpicker(), 0);
-
-                        // this.form.controls['title'].setValue(project.title);
-                        // this.project['title'] = project.title;
-                        // this.form.controls['description'].setValue(project.description);
-                        // this.form.controls['commercials'].setValue(project.commercials);
-                        // this.form.controls['client'].setValue(project.client);
-                        // this.form.controls['reference'].setValue(project.reference);
-
-                        // this.form.value['description'] = project.description;
-                        // this.form.value['commercials'] = project.commercials;
-                        // this.form.value['client'] = project.client;
-                        // this.form.value['reference'] = project.reference;
-                        // this.pictures = project.pictures;
-                        // this.modulesTable.dataRows = project.modules;
                     }, 0)
                 }
             });
         }
     }
-    
-    ngOnDestroy() {
+
+    ngOnDestroy(): void {
         this.commercialsSub.unsubscribe();
         this.clientsSub.unsubscribe();
     }
-    
+
     onSubmit(form) {
-        console.log(form);
         const project: Project = {
             title: form.title,
             description: form.description,
@@ -175,6 +153,15 @@ export class NewProjectComponent implements OnInit, OnDestroy, AfterViewInit {
             return;
         }
         ref.quantity += amount;
+    }
+
+
+    addModule(mod) {
+        this.modulesTable.dataRows.push(Object.assign({}, mod, { quantity: 0}));
+    }
+
+    deleteModule(index) {
+        this.modulesTable.dataRows.splice(index, 1);
     }
 
 }
