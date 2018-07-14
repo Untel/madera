@@ -16,19 +16,19 @@ export class UiService {
     }
 
     success(message) {
-        this.notify(message, 'done', 'success');
+        this.notify(message, 'check', 'success');
     }
 
     danger(message) {
-        this.notify('<b>Erreur ! </b>' + message, 'error', 'error');
+        this.notify('<b>Erreur ! </b>' + message, 'add_alert', 'danger');
     }
 
     primary(message) {
-        this.notify(message, 'notifications', 'primary');
+        this.notify(message, 'add_alert', 'primary');
     }
 
     warning(message) {
-        this.notify(message, 'warning', 'warning');
+        this.notify(message, 'add_alert', 'warning');
     }
 
     notify(message, icon, type) {

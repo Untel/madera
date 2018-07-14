@@ -88,7 +88,7 @@
 										title="Type"
 										name="type"
 										[(ngModel)]="type">
-										<option disabled>Selectionnez l'ossature du module</option>
+										<option disabled>Selectionnez le type du module</option>
 										<option value="muri">Mur intérieur</option>
 										<option value="mure">Mur extérieur</option>
 										<option value="toit">Toîture</option>
@@ -285,7 +285,7 @@
 										title="ossature"
 										name="ossature"
 										[(ngModel)]="spe.ossature">
-										<option disabled>Selectionnez l'ossature du module</option>
+										<option disabled>Selectionnez le plafond du module</option>
 										<option>Bardage bois</option>
 										<option>Bois composite</option>
 										<option>PVC</option>
@@ -377,27 +377,13 @@
 								</div>
 							</div>
 						</div>
-					</div>
-
-
-					<div class="clearfix"></div>							
-					<button type="submit" class="btn btn-info pull-right">Sauvegarder</button>
-					<div class="clearfix"></div>
-
-				</div>
-
-			</form>
-
-			<pre>
-
-				{{ mod | json }}
-
-			</pre>
-			<pre>
-
-					{{ spe | json }}
 	
-				</pre>
+						<div class="clearfix"></div>							
+						<button type="submit" class="btn btn-info pull-right">Sauvegarder</button>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</form>
 		</div>
     </div>
 </div>

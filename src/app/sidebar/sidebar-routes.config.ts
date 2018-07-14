@@ -16,6 +16,11 @@ export const ROUTES: RouteInfo[] = [
         title: 'Modules',
         iconType: 'material-icons',
         iconName: 'extension'
+    }, {
+        path: '/clients',
+        title: 'Clients',
+        iconType: 'material-icons',
+        iconName: 'person'
     }
 
 ];
