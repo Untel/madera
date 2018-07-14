@@ -85,17 +85,11 @@
 						</div>				
 						
 						<div class="clearfix"></div>							
-						<button type="submit" class="btn btn-success pull-right">Sauvegarder</button>
+						<button type="submit" [disabled]="submitting" class="btn btn-success pull-right">Sauvegarder</button>
 						<div class="clearfix"></div>
 					</div>
 				</div>
 			</form>
-
-			<pre>
-
-				{{ client | json }}
-
-			</pre>
 		</div>
     </div>
 </div>

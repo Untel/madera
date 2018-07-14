@@ -35,6 +35,10 @@ export class LockComponent implements OnInit{
     };
     ngOnInit(){
 
+        this.af.auth.subscribe((state) => {
+            console.log('State is', state);
+        });
+
         this.userService.user$.subscribe((user) => {
             console.log('USER IS ', user);
         });
@@ -53,9 +57,8 @@ export class LockComponent implements OnInit{
             return;
         }
 
-        this.af.auth.getAuth().auth.updatePassword(form.password).then(() => {
-            this.ui.success('Le mot de passe à bien été modifié');
-            this.router.navigateByUrl('/profile');
-        });
+        setTimeout(() => {
+            this.router.navigateByUrl('/pages/login');
+        }, 2000);
     }
 }

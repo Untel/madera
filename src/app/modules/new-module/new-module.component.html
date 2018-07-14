@@ -179,16 +179,37 @@
 						<div class="row" *ngIf="mod.type === 'muri'">
 							<div class="col-md-6">
 								<div class="form-group label-floating">
-									<label class="control-label">Ossature</label>
+									<label class="control-label">Parement intérieur</label>
 									<select 
 										class="selectpicker selectOssature fixIcon" 
 										data-style="select-with-transition" 
-										title="ossature"
-										name="ossature"
-										[(ngModel)]="spe.ossature">
-										<option disabled>Selectionnez l'ossature du module</option>
+										title="parement"
+										name="parement"
+										[(ngModel)]="spe.parement">
+										<option disabled>Selectionnez le parement intérieur du module</option>
+										<option>Pierre noir</option>
+										<option>Pierre blanche</option>
+										<option>Pierre standard</option>
+										<option>Brique</option>
 										<option>Bois</option>
-										<option>Crepis</option>
+										<option>Placo</option>
+
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group label-floating">
+									<label class="control-label">Pare-vapeur</label>
+									<select 
+										class="selectpicker selectOssature fixIcon" 
+										data-style="select-with-transition" 
+										title="pareVapeur"
+										name="pareVapeur"
+										[(ngModel)]="spe.pareVapeur">
+										<option disabled>Selectionnez le pare-vapeur du module</option>
+										<option>Papier de tapisserie plastifié</option>
+										<option>Carton-plâtre recouvert d'une feuille d'aluminium</option>
+										<option>Système bitumineux multicouche</option>
 									</select>
 								</div>
 							</div>
@@ -206,69 +227,6 @@
 										<option>Laine de roche</option>
 										<option>Chanvre</option>
 										<option>Laine de mouton</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group label-floating">
-									<label class="control-label">Habillage</label>
-									<select 
-										class="selectpicker selectOssature fixIcon" 
-										data-style="select-with-transition" 
-										title="habillage"
-										name="habillage"
-										[(ngModel)]="spe.habillage">
-										<option disabled>Selectionnez l'habillage du module</option>
-										<option>Bois</option>
-										<option>Crepis</option>
-									</select>
-								</div>
-							</div>
-
-							<div class="col-md-6">
-								<div class="form-group label-floating">
-									<label class="control-label">Montant</label>
-									<select 
-										class="selectpicker selectOssature fixIcon" 
-										data-style="select-with-transition" 
-										title="montant"
-										name="montant"
-										[(ngModel)]="spe.montant">
-										<option disabled>Selectionnez le montant du module</option>
-										<option>Bois</option>
-										<option>Crepis</option>
-									</select>
-								</div>
-							</div>
-
-							<div class="col-md-6">
-								<div class="form-group label-floating">
-									<label class="control-label">Pannel de structure</label>
-									<select 
-										class="selectpicker selectOssature fixIcon" 
-										data-style="select-with-transition" 
-										title="pannel"
-										name="pannel"
-										[(ngModel)]="spe.pannel">
-										<option disabled>Selectionnez le pannel de structure du module</option>
-										<option>Bois</option>
-										<option>Crepis</option>
-									</select>
-								</div>
-							</div>
-
-							<div class="col-md-6">
-								<div class="form-group label-floating">
-									<label class="control-label">Pare-pluie</label>
-									<select 
-										class="selectpicker selectOssature fixIcon" 
-										data-style="select-with-transition" 
-										title="parePluie"
-										name="parePluie"
-										[(ngModel)]="spe.parePluie">
-										<option disabled>Selectionnez le pare-pluie du module</option>
-										<option>Bois</option>
-										<option>Crepis</option>
 									</select>
 								</div>
 							</div>
@@ -348,7 +306,7 @@
 						<div class="row" *ngIf="mod.type === 'sol'">
 							<div class="col-md-6">
 								<div class="form-group label-floating">
-									<label class="control-label">Ossature</label>
+									<label class="control-label">Dalle de plancher</label>
 									<select 
 										class="selectpicker selectOssature fixIcon" 
 										data-style="select-with-transition" 
@@ -356,14 +314,16 @@
 										name="ossature"
 										[(ngModel)]="spe.ossature">
 										<option disabled>Selectionnez l'ossature du module</option>
-										<option>Bois</option>
-										<option>Crepis</option>
+										<option>Mousse PVC</option>
+										<option>Pin Blanc</option>
+										<option>Composite</option>
+
 									</select>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group label-floating">
-									<label class="control-label">Isolant</label>
+									<label class="control-label">Solive</label>
 									<select 
 										class="selectpicker selectOssature fixIcon" 
 										data-style="select-with-transition" 
@@ -371,8 +331,13 @@
 										name="isolant"
 										[(ngModel)]="spe.isolant">
 										<option disabled>Selectionnez l'isolant du module</option>
-										<option>Bois</option>
-										<option>Crepis</option>
+										<option>Chêne</option>
+										<option>Hêtre</option>
+										<option>Erable</option>
+										<option>Pin</option>
+										<option>Epicéa</option>
+										<option>Cèdre</option>
+										<option>Mélèze</option>
 									</select>
 								</div>
 							</div>

@@ -177,4 +177,5 @@ export class NewProjectComponent implements OnInit, OnDestroy, AfterViewInit {
         this.modulesTable.dataRows.splice(index, 1);
     }
 
+
 }

@@ -12,19 +12,22 @@ import { Project } from '../models/project.model';
 @Injectable()
 export class AuthService {
 
+    credentials;
     state$: Observable<FirebaseAuthState>;
 
     constructor(private af: AngularFire, private router: Router ) {
         this.state$ = this.af.auth.asObservable();
-        this.state$.filter(auth => !auth).subscribe(() => this.router.navigateByUrl('/pages/login'));
+        // this.state$.filter(auth => !auth).subscribe(() => this.router.navigateByUrl('/pages/login'));
     }
 
     logout = () => {
         return this.af.auth.logout().then(() => {
+            this.router.navigateByUrl('/pages/login');
         });
     }
 
     loginWithCredentials = (email, password) => {
+        this.credentials = { email, password };
         return this.af.auth.login({ email, password }, {
             provider: AuthProviders.Password,
             method: AuthMethods.Password
@@ -57,30 +60,33 @@ export class AuthService {
 
         const commercial: User = { email: 'client1@test.fr', firstName: 'Adrien', lastName: 'Fernandes', role: 'client', uid: 'i1jIvHDB93cE3SEqtM29Mb8rpd93' };
         const client: User = { email: 'commercial1@test.fr', firstName: 'Max Andre', lastName: 'Leroy', role: 'commercial', uid: 'wYnDeaWp81hjzBInhj1ipTgvR8P2' };
-        const compta: User = { email: 'compta1@test.fr', firstName: 'Clément', lastName: 'Deboos', role: 'accounts-departement', uid: '9s5uP5A5eleFN92FzPLpOcyLe923' };
+        const compta: User = { email: 'compta1@test.fr', firstName: 'Clément', lastName: 'Deboos', role: 'compta', uid: '9s5uP5A5eleFN92FzPLpOcyLe923' };
+        const etude: User = { email: 'compta1@test.fr', firstName: 'Clément', lastName: 'Deboos', role: 'etude', uid: '9s5uP5A5eleFN92FzPLpOcyLe923' };
 
         const usersToAdd = {};
         usersToAdd[commercial.uid] = commercial;
         usersToAdd[client.uid] = client;
         usersToAdd[compta.uid] = compta;
+        usersToAdd[etude.uid] = etude;
 
-        const project: Project = {
-            title: 'Maison 7 pièces',
-            pictures: ['/assets/img/background-1.jpg'],
-            description: 'Maison pour M. Leroy.',
-            commercials: ['i1jIvHDB93cE3SEqtM29Mb8rpd93'],
-            reference: 'D918273465',
-            modules: [
-                { name: 'Mur extérieur bois/crépis', gamme: 'Éco.', reference: '912345', quantity: 8, price: 599.99 },
-                { name: 'Mur intérieur bois/crépis', gamme: 'Éco.', reference: '894545', quantity: 6, price: 285.99 },
-                { name: 'Plafond x50m² bois/crépis', gamme: 'Éco.', reference: '454588', quantity: 7, price: 351.99 },
-            ],
-            client: 'wYnDeaWp81hjzBInhj1ipTgvR8P2'
-        }
-        projects.push(project);
+
+        // const project: Project = {
+        //     title: 'Maison 7 pièces',
+        //     pictures: ['/assets/img/background-1.jpg'],
+        //     description: 'Maison pour M. Leroy.',
+        //     commercials: ['i1jIvHDB93cE3SEqtM29Mb8rpd93'],
+        //     reference: 'D918273465',
+        //     modules: [
+        //         { name: 'Mur extérieur bois/crépis', gamme: 'Éco.', reference: '912345', quantity: 8, price: 599.99 },
+        //         { name: 'Mur intérieur bois/crépis', gamme: 'Éco.', reference: '894545', quantity: 6, price: 285.99 },
+        //         { name: 'Plafond x50m² bois/crépis', gamme: 'Éco.', reference: '454588', quantity: 7, price: 351.99 },
+        //     ],
+        //     client: 'wYnDeaWp81hjzBInhj1ipTgvR8P2'
+        // }
+        // projects.push(project);
 
         this.af.database.object('/users').set(usersToAdd);
-        // this.af.auth.createUser({ email: 'client1@test.fr', password: 'azerty' });
+        this.af.auth.createUser({ email: 'etude1@test.fr', password: 'azerty' });
         // this.af.auth.createUser({ email: 'commercial1@test.fr', password: 'azerty' });
         // this.af.auth.createUser({ email: 'compta1@test.fr', password: 'azerty' });
     }

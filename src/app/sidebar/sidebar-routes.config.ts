@@ -5,7 +5,7 @@ export const ROUTES: RouteInfo[] = [
         path: '/profil', 
         title: 'Profil', 
         iconType: 'user', 
-        iconName: '' 
+        iconName: '',
     }, {
         path: '/projects',
         title: 'Projets',

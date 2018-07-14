@@ -58,7 +58,7 @@
                                 </div>-->
 
                             </div>
-                            <button type="submit" class="btn btn-rose pull-right">Update Profile</button>
+                            <button type="submit" class="btn btn-success pull-right">Mettre à jours</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -67,9 +67,7 @@
             <div class="col-md-4">
                 <div class="card card-profile">
                     <div class="card-avatar">
-                        <a href="#pablo">
-                            <img style="height: 130px; width: 130px" class="img" [src]="user?.photo" />
-                        </a>
+                        <img style="height: 130px; width: 130px" class="img" [src]="user?.photo || '/assets/img/placeholder.jpg'" />
                     </div>
                     
                     <div class="card-content">

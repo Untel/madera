@@ -10,6 +10,7 @@ export class AdminGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     return this.auth.state$.map(state => {
+      console.log('Checking', state)
       if (!state) {
         console.log('Cannot activate admin, redirecting to login page');
         this.router.navigateByUrl('/pages/login');
