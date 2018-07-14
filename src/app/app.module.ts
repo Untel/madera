@@ -42,6 +42,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/distinct';
 import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/observable/forkJoin';
+import { FilterPipe } from './filter.pipe';
 
 
 @NgModule({
@@ -66,6 +67,6 @@ import 'rxjs/add/observable/forkJoin';
         UiService,
         AdminGuard,
     ],
-    bootstrap:    [ AppComponent ]
+    bootstrap:    [ AppComponent ],
 })
 export class AppModule { }

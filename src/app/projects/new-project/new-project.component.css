@@ -9,3 +9,33 @@
 /* .main-content {
     background-color: red;
 } */
+
+.moduleSelector {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+}
+.moduleSelector .card-title {
+}
+.moduleSelector .card {
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+}
+
+.moduleSelector .card.selected {
+    background-color: #9c27b0;
+    border: 1px solid white;
+}
+
+.moduleSelector .card.selected * {
+    color: white !important;
+}
+
+.moduleSelector .filters {
+    display: inline-flex;
+}
+
+.checkbox {
+    margin-top: 0 !important;
+}

@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { LyResizingCroppingImageModule } from 'alyle-ui/resizing-cropping-images';
 import { ViewProjectComponent } from './view-project/view-project.component';
 import { MdModule } from '../md/md.module';
+import { FilterPipe } from '../filter.pipe';
 
 @NgModule({
   imports: [
@@ -18,9 +19,9 @@ import { MdModule } from '../md/md.module';
     FormsModule,
     MdModule,
     RouterModule.forChild(ProjectsRoutes),
-    LyResizingCroppingImageModule
+    LyResizingCroppingImageModule,
   ],
-  declarations: [ProjectsComponent, NewProjectComponent, ViewProjectComponent],
+  declarations: [ProjectsComponent, NewProjectComponent, ViewProjectComponent, FilterPipe],
   providers: [ ProjectService ]
 })
 export class ProjectsModule { }

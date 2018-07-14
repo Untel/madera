@@ -94,57 +94,6 @@
                                     </div>
 								</div>
 
-								<div class="content table-responsive" style="overflow: inherit; overflow-x: inherit;">
-									<table class="table">
-										<thead>
-											
-										</thead>
-										<tbody>
-											<th class="text-center" *ngFor="let header of modulesTable.headerRow">{{ header }}</th>
-											<th></th>
-											<tr *ngFor="let row of modulesTable.dataRows; let i = index">
-												<td>{{ row.name }}</td>
-												<td class="text-center">{{ row.reference }}</td>
-												<td class="text-center">{{ row.gamme }}</td>
-												<td class="text-center">
-													<span (click)="add(row, -1)" class="btn btn-danger btn-simple btn-xs">
-														<i class="material-icons">remove</i>
-													</span>
-													{{ row.quantity }}
-													<span (click)="add(row, 1)" class="btn btn-success btn-simple btn-xs">
-														<i class="material-icons">add</i>
-													</span>
-												</td>
-												<td class="text-center">{{ row.price }}€</td>
-												<td class="text-center">{{ row.quantity * row.price | number:'3.1-5':'fr' }}€</td>
-												<td class="text-center">
-													<span (click)="deleteModule(index)" class="btn btn-danger btn-simple btn-xs">
-														<i class="material-icons">clear</i>
-													</span>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<div class="dropdown pull-left">
-														<button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
-															<i class="material-icons">add</i>
-															<span class="caret"></span>
-														</button>
-														<ul class="dropdown-menu dropdown-menu-right" role="menu">
-															<li *ngFor="let mod of modules">
-																<a href="javascript:void(0)" (click)="addModule(mod)">{{ mod.name }} - {{ mod.reference }}</a>																
-															</li>
-														</ul>
-													</div>
-												</td>
-												<td colspan="4" class="text-right">Total:</td>
-												<td class="text-center"><b>{{ getPrice() | number:'3.1-5':'fr' }}€</b></td>
-												<td></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-
 							</div>
 
 							<div class="col-md-4">
@@ -185,11 +134,130 @@
 								</button>
 							</div>
 
+							<div class="col-md-12">
+								<div class="content table-responsive" style="overflow: inherit; overflow-x: inherit;">
+									<table class="table">
+										<thead>
+											
+										</thead>
+										<tbody>
+											<th class="text-center" *ngFor="let header of modulesTable.headerRow">{{ header }}</th>
+											<th></th>
+											<tr *ngFor="let row of modulesTable.dataRows; let i = index">
+												<td>{{ row.name }}</td>
+												<td class="text-center">{{ row.reference }}</td>
+												<td class="text-center">{{ row.gamme }}</td>
+												<td class="text-center">
+													<span (click)="add(row, -1)" class="btn btn-danger btn-simple btn-xs">
+														<i class="material-icons">remove</i>
+													</span>
+													{{ row.quantity }}
+													<span (click)="add(row, 1)" class="btn btn-success btn-simple btn-xs">
+														<i class="material-icons">add</i>
+													</span>
+												</td>
+												<td class="text-center">{{ row.price }}€</td>
+												<td class="text-center">{{ row.quantity * row.price | number:'3.1-5':'fr' }}€</td>
+												<td class="text-center">
+													<span (click)="deleteModule(index)" class="btn btn-danger btn-simple btn-xs">
+														<i class="material-icons">clear</i>
+													</span>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="dropdown pull-left">
+														<button (click)="showSelector = !showSelector" type="button" class="btn btn-round btn-info dropdown-toggle">
+															<i class="material-icons">{{ !showSelector ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</i> Modules
+														</button>
+													</div>
+												</td>
+												<td colspan="4" class="text-right">Total:</td>
+												<td class="text-center"><b>{{ getPrice() | number:'3.1-5':'fr' }}€</b></td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+								<div *ngIf="showSelector">
+									<div class="selectorFilters">
+										<div class="row">
+											<label class="col-sm-2 label-on-left">Gamme</label>
+											<div class="col-sm-10">
+												<div class="checkbox checkbox-inline">
+													<label>
+														<input type="checkbox" name="optionsCheckboxes" [(ngModel)]="filters.gamme.eco">Eco
+													</label>
+												</div>
+												<div class="checkbox checkbox-inline">
+													<label>
+														<input type="checkbox" name="optionsCheckboxes" [(ngModel)]="filters.gamme.standard">Standard
+													</label>
+												</div>
+												<div class="checkbox checkbox-inline">
+													<label>
+														<input type="checkbox" name="optionsCheckboxes" [(ngModel)]="filters.gamme.premium">Premium
+													</label>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<label class="col-sm-2 label-on-left">Type</label>
+											<div class="col-sm-10">
+												<div class="checkbox checkbox-inline">
+													<label>
+														<input type="checkbox" name="optionsCheckboxes" [(ngModel)]="filters.type.muri">Mur intérieur
+													</label>
+												</div>
+												<div class="checkbox checkbox-inline">
+													<label>
+														<input type="checkbox" name="optionsCheckboxes" [(ngModel)]="filters.type.mure">Mur extérieur
+													</label>
+												</div>
+												<div class="checkbox checkbox-inline">
+													<label>
+														<input type="checkbox" name="optionsCheckboxes" [(ngModel)]="filters.type.toit">Toîture
+													</label>
+												</div>
+												<div class="checkbox checkbox-inline">
+													<label>
+														<input type="checkbox" name="optionsCheckboxes" [(ngModel)]="filters.type.sol">Plancher
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="moduleSelector">
+										<a 	href="javascript:void(0)"
+											*ngFor="let mod of modules | filter:filters" 
+											class="card card-product"
+											(click)="addModule(mod)"
+											[class.selected]="isSelected(mod)"
+										>
+											<div class="card-content">
+												<h4 class="card-title">
+													<a href="javascript:void(0)">{{ mod.name }}</a>
+												</h4>
+												<hr/>
+												<div style="text-align: left" class="card-description">
+													<p><b>Reference:</b> {{ mod.reference }}</p>
+													<p><b>Description:</b> {{ mod.description }}</p>
+													<p><b>Gamme:</b> {{ mod.gamme }}</p>
+													<p><b>Prix:</b> {{ mod.price }}€/u</p>
+												</div>
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+
                             <div class="clearfix"></div>							
                             <button type="button" (click)="onSubmit(projectForm.value)" class="btn btn-success pull-right">Sauvegarder</button>
                             <div class="clearfix"></div>
 
 						</div>
+
 
 						<!-- <pre>
 							{{ projectForm.value | json }}

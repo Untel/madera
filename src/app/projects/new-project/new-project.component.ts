@@ -36,6 +36,20 @@ export class NewProjectComponent implements OnInit, OnDestroy, AfterViewInit {
     clients$: Observable<User[]>;
     clients: User[] = [];
     clientsSub: Subscription;
+    showSelector = false;
+    filters = {
+        gamme: {
+            eco: true,
+            standard: true,
+            premium: true,
+        },
+        type: {
+            muri: true,
+            mure: true,
+            sol: true,
+            toit: true,
+        }
+    };
 
     project: Project = {
         title: '',
@@ -47,6 +61,7 @@ export class NewProjectComponent implements OnInit, OnDestroy, AfterViewInit {
         modules: [],
     };
 
+    selectedModules = [];
     modules: any = [];
 
     @ViewChild('projectForm') form: NgForm;
@@ -162,19 +177,30 @@ export class NewProjectComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
     addModule(mod) {
-        this.modulesTable.dataRows.push(Object.assign({}, {
-            name: mod.name,
-            description: mod.description,
-            price: mod.price,
-            type: mod.type,
-            reference: mod.reference,
-            gamme: mod.gamme,
-            quantity: 1
-        }));
+        if (!this.isSelected(mod)) {
+            this.modulesTable.dataRows.push(Object.assign({}, {
+                name: mod.name,
+                description: mod.description,
+                price: mod.price,
+                type: mod.type,
+                reference: mod.reference,
+                gamme: mod.gamme,
+                quantity: 1,
+            }));
+        } else {
+            const idx = this.modulesTable.dataRows.findIndex(m => m.reference === mod.reference);
+            this.modulesTable.dataRows.splice(idx, 1);
+        }
     }
 
     deleteModule(index) {
         this.modulesTable.dataRows.splice(index, 1);
+    }
+
+    isSelected(mod) {
+        return !!this.modulesTable.dataRows.find(m => {
+            return m.reference === mod.reference;
+        });
     }
 
 
