@@ -6,16 +6,16 @@ export const ROUTES: RouteInfo[] = [
         title: 'Profil', 
         iconType: 'user', 
         iconName: '' 
-    }, { 
-    //     path: '/dashboard', 
-    //     title: 'Accueil', 
-    //     iconType: 'material-icons', 
-    //     iconName: 'dashboard' 
-    // }, { 
-        path: '/projects', 
-        title: 'Projets', 
-        iconType: 'material-icons', 
-        iconName: 'apps' 
+    }, {
+        path: '/projects',
+        title: 'Projets',
+        iconType: 'material-icons',
+        iconName: 'dashboard'
+    }, {
+        path: '/modules',
+        title: 'Modules',
+        iconType: 'material-icons',
+        iconName: 'extension'
     }
 
 ];

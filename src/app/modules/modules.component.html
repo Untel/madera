@@ -1,0 +1,52 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div *ngFor="let mod of modules; let i = index;" class="col-lg-4 col-md-6">
+                <div class="card card-product">
+                    <div class="card-content">
+                        <h4 class="card-title">
+                            <a href="#pablo">{{ mod.name }}</a>
+                        </h4>
+
+                        <div class="card-actions">
+                            <button (click)="removeModule()" type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Supprimer">
+                                <i class="material-icons">close</i>
+                            </button>
+                        </div>
+                        <hr/>
+                        <div style="text-align: left" class="card-description">
+                            <p><b>Reference:</b> {{ mod.reference }}</p>
+                            <p><b>Description:</b> {{ mod.description }}</p>
+                            <p><b>Gamme:</b> {{ mod.gamme }}</p>
+                            <p><b>Prix:</b> {{ mod.price }}€/u</p>
+                        </div>
+                    </div>
+                    <!-- <div class="card-footer">
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="card card-product">
+                    <div class="card-content">
+                        <h1 class="card-title">
+                            <a routerLink="/modules/new">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </h1>
+                    </div>
+                    <div class="card-footer text-center">
+                        <div class="price">
+                            Nouveau module
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+ 

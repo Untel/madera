@@ -22,6 +22,9 @@ export const AppRoutes: Routes = [
             path: 'projects',
             loadChildren: './projects/projects.module#ProjectsModule'
         },{
+            path: 'modules',
+            loadChildren: './modules/modules.module#ModulesModule'
+        },{
             path: 'components',
             loadChildren: './components/components.module#ComponentsModule'
         },{

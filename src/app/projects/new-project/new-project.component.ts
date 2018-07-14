@@ -6,6 +6,8 @@ import { UserService } from '../../services/user.service';
 import { ProjectService } from '../../services/project.service';
 import { User, Project } from '../../models/all.model';
 
+import { AngularFire } from 'angularfire2'
+
 import { ResizingCroppingImagesComponent as ResizingCroppingImages } from 'alyle-ui/resizing-cropping-images';
 
 import { Observable } from 'rxjs/Observable';
@@ -21,22 +23,32 @@ declare var $: any;
 export class NewProjectComponent implements OnInit, OnDestroy, AfterViewInit {
     // @ViewChild('projectForm') form;
     @ViewChild('_img') _img: ResizingCroppingImages;
-    
+
     id: number = null;
     pictures: string[] = [];
-    
+
     commercials$: Observable<User[]>;
     commercials: User[] = [];
     commercialsSub: Subscription;
-    
+
     clients$: Observable<User[]>;
     clients: User[] = [];
     clientsSub: Subscription;
 
-    project: Project;
-    
+    project: Project = {
+        title: '',
+        description: '',
+        commercials: [],
+        reference: '',
+        client: '',
+        pictures: [],
+        modules: [],
+    };
+
+    modules: any = [];
+
     @ViewChild('projectForm') form: NgForm;
-    
+
     modulesTable = {
         headerRow: ['Module', 'Ref', 'Gamme', 'Quantité', 'Prix/U', 'Total'],
         dataRows: [
@@ -45,31 +57,41 @@ export class NewProjectComponent implements OnInit, OnDestroy, AfterViewInit {
             { name: 'Plafond x50m² bois/crépis', gamme: 'Éco.', reference: '454588', quantity: 0, price: 1000.99 },
         ]
     };
-    
-    constructor(private projectService: ProjectService, private userService: UserService, private router: Router, private route: ActivatedRoute) { }
-    
+
+    constructor(
+        private af: AngularFire,
+        private projectService: ProjectService,
+        private userService: UserService,
+        private router: Router,
+        private route: ActivatedRoute
+    ) { }
+
     ngOnInit() {
         this._img.sizeW = 483.33;
         this._img.sizeH = 362;
-        
+
         this.commercialsSub = this.userService
         .getCommercials()
         .subscribe(com => {
             this.commercials = com;
             setTimeout(() => $(".selectCommercial").selectpicker(), 0);
         });
-        
+
         this.clientsSub = this.userService
         .getClients()
         .subscribe(cus => {
             this.clients = cus;
             setTimeout(() => $(".selectClient").selectpicker(), 0);
         });
-        
+
+        this.af.database.list('/modules').subscribe((modules) => {
+            this.modules = modules;
+        });
+
         console.log('route', this.router);
         this.id = this.route.snapshot.params['id'];
     }
-    
+
     ngAfterViewInit(): void {
         if (this.id) {
             console.log('Has param')
@@ -82,7 +104,7 @@ export class NewProjectComponent implements OnInit, OnDestroy, AfterViewInit {
                     this.form.controls['commercials'],
                     this.form.controls['client'],
                     this.form.controls['reference']);
-                    
+
                     setTimeout(() => {
                         this.project = project;
                         setTimeout(() => $(".selectClient").selectpicker(), 0);

@@ -3,7 +3,7 @@
 		<div class="col-md-12">
 
 			<form (ngSubmit)="onSubmit(projectForm.value)" #projectForm="ngForm" >
-				<pre>{{project | json}}</pre>
+				<!-- <pre>{{project | json}}</pre> -->
                 <div class="card">
 
                     <div class="card-header card-header-icon" data-background-color="blue">
@@ -18,8 +18,8 @@
                             <div class="col-md-8">
 
 								<div class="row">
-									form: {{ projectForm?.controls?.title?.value }}
-									project: {{ project?.title }}
+									<!-- form: {{ projectForm?.controls?.title?.value }}
+									project: {{ project?.title }} -->
 
 									<div class="col-md-8">
 										<div class="form-group label-floating">
@@ -79,9 +79,7 @@
 												</option>
 											</select>
 										</div>
-									</div>
-									<!-- <div *ngFor="let commercial of (commercials$ | async)">Paris </div>
-									<div *ngFor="let commercial of commercials">Paris </div>									 -->
+									</div>							 -->
 									
 								</div>
 
@@ -121,7 +119,12 @@
 												<td class="text-center">{{ row.quantity * row.price | number:'3.1-5':'fr' }}€</td>
 											</tr>
 											<tr>
-												<td colspan="5" class="text-right">Total:</td>
+												<td>
+													<button type="button" class="btn btn-just-icon btn-simple btn-sm" (click)="addModule()">
+														<i class="material-icons">add</i> Module									
+													</button>
+												</td>
+												<td colspan="4" class="text-right">Total:</td>
 												<td class="text-center"><b>{{ getPrice() | number:'3.1-5':'fr' }}€</b></td>
 											</tr>
 										</tbody>
