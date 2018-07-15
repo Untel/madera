@@ -19,11 +19,11 @@
 						</small>
 						
 						<div>
-							<b>Commercial en charge:</b> Adrien Fernandes
+							<b>Commercial en charge:</b> {{ commercial$?.firstName | async }} {{ commercial$?.lastName | async }} 
 						</div>
 						
 						<div>
-							<b>Client:</b> Max Andre Leroy
+							<b>Client:</b> {{ client$?.firstName | async }} {{ client$?.lastName | async }} 
 						</div>
 						
 					</div>
@@ -155,7 +155,7 @@
 						</div>
 						<div class="col-md-6">
 							<p>
-								Monsieur Max Andre Leroy<br/>
+								Monsieur {{ client$?.firstName | async }} {{ client$?.lastName | async }} <br/>
 								3 rue latouche tréville,<br/>
 								29200 Brest
 							</p>

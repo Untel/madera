@@ -8,6 +8,7 @@ import { User, Project } from '../../models/all.model';
 
 import { ResizingCroppingImagesComponent as ResizingCroppingImages } from 'alyle-ui/resizing-cropping-images';
 
+import { FirebaseObjectObservable } from 'angularfire2'
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
 
@@ -21,7 +22,8 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
 
     project$: Observable<Project>;
     project: Project = null;
-
+    client$: FirebaseObjectObservable<User>;
+    commercial$: FirebaseObjectObservable<User>;
 
     headerRow = ['Module', 'Ref', 'Gamme', 'Quantité', 'Prix/U', 'Total'];
 
@@ -35,6 +37,8 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
 
       this.project$.subscribe((project) => {
         this.project = project;
+        this.client$ = this.userService.getUser(project.client);
+        this.commercial$ = this.userService.getUser(project.commercials[0]);
       });
     }
 
