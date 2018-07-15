@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { AngularFire } from 'angularfire2';
+import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { Project } from '../models/project.model';
 
 import { UiService } from './ui.service';
@@ -37,6 +37,9 @@ export class ProjectService {
 
 	getProject(id: number) {
 		return this.af.database.object('/projects/' + id);
+	}
+
+	updateStep(id, num) {
 	}
 
 	getProjectsWithActors(): Observable<Project[]> {

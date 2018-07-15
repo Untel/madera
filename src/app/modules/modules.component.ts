@@ -4,6 +4,7 @@ import { ProjectService } from '../services/project.service';
 import { Project } from '../models/project.model';
 import { AngularFire } from 'angularfire2';
 import { UiService } from '../services/ui.service';
+import { UserService } from '../services/user.service';
 
 declare const $: any;
 declare const swal: any;
@@ -14,16 +15,29 @@ declare const swal: any;
 export class ModulesComponent implements OnInit, AfterViewInit {
 
 	modules: any[] = [];
+	translate = {
+		parePluie: 'Pare pluie',
+		pareVapeur: 'Pare-vapeur',
+		habillage: 'Habillage',
+		ossature: 'Ossature',
+		parement: 'Parement',
+		isolant: 'Isolant',
+	}
 
-	constructor(private af: AngularFire, private ui: UiService) {}
+	constructor(private af: AngularFire, private ui: UiService, private userService: UserService) {}
 
 	public ngOnInit() {
 		this.af.database.list('/modules').subscribe((modules) => {
 			this.modules = modules;
+			console.log(modules);
 		});
 	}
 
 	public ngAfterViewInit() {
+	}
+
+	toArray(obj) {
+		return Object.keys(obj);
 	}
 
 	public removeModule(mod) {

@@ -67,6 +67,11 @@ export class SidebarComponent implements OnInit, AfterViewInit {
             }
         }, 10);
     }
+
+    canShow(route) {
+        return route.canShow.includes(this.userService.role);
+    }
+
 }
 
 const mda: any = {

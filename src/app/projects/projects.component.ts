@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 import { ProjectService } from '../services/project.service';
 import { Project } from '../models/project.model';
+import { UserService } from '../services/user.service';
 
 declare const $: any;
 declare const swal: any;
@@ -15,7 +16,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
 
 	projects: Project[];
 
-	constructor(private projectService: ProjectService) {}
+	constructor(private projectService: ProjectService, private userService: UserService) {}
 
 	public ngOnInit() {
 		this.projectService

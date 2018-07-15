@@ -3,34 +3,6 @@
 
 			<div class="col-md-4">
 				<div class="card">
-
-					
-					<div class="card-header card-header-icon" data-background-color="blue">
-						<i class="material-icons">apps</i>
-					</div>
-					<div class="card-content">
-						<h4 class="card-title">
-							{{ project?.title }}
-						</h4>
-						
-						
-						<small>
-							{{ project?.description }}
-						</small>
-						
-						<div>
-							<b>Commercial en charge:</b> Adrien Fernandes
-						</div>
-						
-						<div>
-							<b>Client:</b> Max Andre Leroy
-						</div>
-						
-					</div>
-					
-				</div>
-				
-				<div class="card">
 					
 					<div class="card-header card-header-icon" data-background-color="orange">
 						<i class="material-icons">hourglass_empty</i>
@@ -42,32 +14,32 @@
 						
 						<ul class="timeline timeline-simple">
 							<ng-container *ngFor="let s of steps; let i = index;">
-								<li *ngIf="step + 1 >= i || showMore" class="timeline-inverted">
+								<li *ngIf="this.project?.step + 1 >= i || showMore" class="timeline-inverted">
 									<div class="timeline-badge"
-										[class.success]="step > i"
-										[class.danger]="step < i"
-										[class.info]="step === i"
+										[class.success]="this.project?.step > i"
+										[class.danger]="this.project?.step < i"
+										[class.info]="this.project?.step === i"
 									>
-										<i class="material-icons">{{ step > i ? 'done' : ( step === i ? 'autorenew' : 'close') }}</i>
+										<i class="material-icons">{{ this.project?.step > i ? 'done' : ( this.project?.step === i ? 'autorenew' : 'close') }}</i>
 									</div>
 									<div class="timeline-panel">
 										<div class="timeline-heading">
 											<span class="label"
-												[class.label-success]="step > i"
-												[class.label-danger]="step < i"
-												[class.label-info]="step === i"
+												[class.label-success]="this.project?.step > i"
+												[class.label-danger]="this.project?.step < i"
+												[class.label-info]="this.project?.step === i"
 											>{{ s }}</span>
 										</div>
 										<!-- <div *ngIf="project.steps && project.steps[i]" class="timeline-body">
 											<p>Accordé il y a 6 jours par Adrien Fernandes</p>
 										</div> -->
-										<div class="timeline-body" *ngIf="step === i">
+										<div class="timeline-body" *ngIf="this.project?.step === i && userService.role === 'compta'">
 											<button type="button" class="btn btn-success btn-small btn-mini" (click)="selectStep(i)">Valider</button>
 										</div>
 									</div>
 								</li>
 							</ng-container>
-							<li *ngIf="step <= steps.length - 2" class="timeline-inverted">
+							<li *ngIf="this.project?.step <= steps.length - 2" class="timeline-inverted">
 								<div class="timeline-badge success" style="cursor: pointer; background-color: #BBBB" (click)="showMore = !showMore">
 									<i class="material-icons"> {{ !showMore ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</i>
 								</div>
@@ -158,7 +130,32 @@
 			</div>
 			
 			<div class="col-md-8">
-				
+				<div class="card">
+					<div class="card-header card-header-icon" data-background-color="blue">
+						<i class="material-icons">apps</i>
+					</div>
+					<div class="card-content">
+						<h4 class="card-title">
+							{{ project?.title }}
+						</h4>
+
+						
+						
+						<small>
+							{{ project?.description }}
+						</small>
+						
+						<div>
+							<b>Commercial en charge:</b> {{ commercial?.firstName }} {{ commercial?.lastName }}
+						</div>
+						
+						<div>
+							<b>Client:</b> {{ client?.firstName }} {{ client?.lastName }}
+						</div>
+						
+					</div>
+					
+				</div>
 				<div class="card">
 					
 					<div class="card-header card-header-icon" data-background-color="purple">
@@ -226,10 +223,12 @@
 							Actions
 						</h4>
 
-						<button class="btn btn-default">Imprimer</button>
-						<button class="btn btn-warning">Demander une révision</button>
-						<button class="btn btn-success">Valider ce devis</button>					
-						
+						<button (click)="print()" class="btn btn-default">Imprimer</button>
+
+						<ng-container *ngIf="userService.role === 'client'">
+							<button class="btn btn-warning">Demander une révision</button>
+							<button class="btn btn-success" *ngIf="!project.step" (click)="selectStep(0)">Valider ce devis</button>
+						</ng-container>
 					</div>
 				</div>
 

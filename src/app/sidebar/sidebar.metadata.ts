@@ -5,4 +5,5 @@ export interface RouteInfo {
     title: string;
     iconType: string;
     iconName: string;
+    canShow?: Array<string>;
 } 

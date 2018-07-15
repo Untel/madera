@@ -1,4 +1,4 @@
-import { FirebaseListObservable } from 'angularfire2/database';
+import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { UiService } from './ui.service';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
@@ -11,15 +11,24 @@ export class UserService {
 
     public user$: Observable<User> = new Observable<User>();
     public users$: FirebaseListObservable<User[]>;
-    private userId;
+    public userId;
+    public role: '';
 
     constructor(private auth: AuthService, private af: AngularFire, ui: UiService) {
         this.user$ = this.auth.state$
             .do( auth => auth ? this.userId = auth.uid : null)
             .filter( auth => !!auth )
-            .switchMap( auth => this.af.database.object(`/users/${auth.uid}`), ( auth, user ) => Object.assign({}, user, auth) );
+            .switchMap( auth => this.af.database.object(`/users/${auth.uid}`), ( auth, user ) => Object.assign({}, user, auth) )
+            .do((user) => {
+                console.log('User role: ', user.role);
+                this.role = user.role;
+            });
 
         this.users$ = this.af.database.list('/users');
+    }
+
+    getUser(id): FirebaseObjectObservable<User> {
+        return this.af.database.object(`/users/${id}`);
     }
 
     updateUser = (user: User) => {

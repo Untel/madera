@@ -10,6 +10,7 @@ import { ResizingCroppingImagesComponent as ResizingCroppingImages } from 'alyle
 
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
+import { FirebaseObjectObservable, AngularFire } from 'angularfire2';
 
 declare var $: any;
 
@@ -19,10 +20,11 @@ declare var $: any;
 })
 export class ViewProjectComponent implements OnInit, OnDestroy {
 
-    project$: Observable<Project>;
+    project$: FirebaseObjectObservable<Project>;
     project: Project = null;
-
-    step = 0;
+    client;
+    commercial;
+    
 
     steps = [
       'Signature du devis',
@@ -37,7 +39,13 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
 
     headerRow = ['Module', 'Ref', 'Gamme', 'Quantité', 'Prix/U', 'Total'];
 
-    constructor(private projectService: ProjectService, private userService: UserService, private route: ActivatedRoute) { }
+    constructor(
+      private projectService: ProjectService,
+      private userService: UserService,
+      private route: ActivatedRoute,
+      private ui: UiService,
+      private af: AngularFire
+    ) { }
 
     ngOnInit() {
       this.route.params.subscribe((params) => {
@@ -47,6 +55,13 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
 
       this.project$.subscribe((project) => {
         this.project = project;
+        
+        this.userService.getUser(project.client).subscribe((client) => {
+          this.client = client;
+        });
+        this.userService.getUser(project.commercials[0]).subscribe((commercial) => {
+          this.commercial = commercial;
+        });
       });
     }
 
@@ -62,7 +77,14 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
     }
 
     selectStep(i) {
-      this.step = i + 1;
+      const step = i + 1;
+      this.project$.update({ step }).then(() => {
+        this.ui.success('L\'étape projet à bien été débloqué');
+      });
+    }
+
+    print() {
+      window.print();
     }
 
 }

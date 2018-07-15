@@ -6,21 +6,25 @@ export const ROUTES: RouteInfo[] = [
         title: 'Profil', 
         iconType: 'user', 
         iconName: '',
+        canShow: ['client', 'commercial', 'compta', 'etude'],
     }, {
         path: '/projects',
         title: 'Projets',
         iconType: 'material-icons',
-        iconName: 'dashboard'
+        iconName: 'dashboard',
+        canShow: ['client', 'commercial', 'compta'],
     }, {
         path: '/modules',
         title: 'Modules',
         iconType: 'material-icons',
-        iconName: 'extension'
+        iconName: 'extension',
+        canShow: ['client', 'commercial', 'compta', 'etude'],
     }, {
         path: '/clients',
         title: 'Clients',
         iconType: 'material-icons',
-        iconName: 'person'
+        iconName: 'person',
+        canShow: ['commercial', 'compta'],
     }
 
 ];

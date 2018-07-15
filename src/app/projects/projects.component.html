@@ -2,70 +2,71 @@
     <div class="container-fluid">
 
         <div class="row">
-            <div *ngFor="let project of projects; let i = index;" class="col-lg-4 col-md-6">
-                <div class="card card-product">
-                    <div class="card-image" data-header-animation="true">
-                        <a href="#pablo">
-                            <img class="img" [src]="project.pictures ? project.pictures[0] : '/assets/img/image_placeholder.jpg'">
-                        </a>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-actions">
-                            <button type="button" class="btn btn-danger btn-simple fix-broken-card">
-                                <i class="material-icons">build</i> Réparer
-                            </button>
-                            <a [routerLink]="'/projects/view/' + project.$key" class="btn btn-default btn-simple" rel="tooltip" data-placement="bottom" title="Voir">
-                                <i class="material-icons">art_track</i>
+            <ng-container *ngFor="let project of projects; let i = index;">
+                <div class="col-lg-4 col-md-6" *ngIf="userService.role !== 'client' || userService.userId === project.client">
+                    <div class="card card-product">
+                        <div class="card-image" data-header-animation="true">
+                            <a href="#pablo">
+                                <img class="img" [src]="project.pictures ? project.pictures[0] : '/assets/img/image_placeholder.jpg'">
                             </a>
-                            <a [routerLink]="'/projects/edit/' + project.$key" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Editer">
-                                <i class="material-icons">edit</i>
-                            </a>
-                            <button (click)="removeProject(project)" type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Supprimer">
-                                <i class="material-icons">close</i>
-                            </button>
                         </div>
-                        <h4 class="card-title">
-                            <a href="#pablo">{{ project.title }}</a>
-                        </h4>
-                        <div class="card-description">
-                            {{ project.description }}
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="price">
-                            <h4>
-                                {{ project.$client ? project.$client.firstName + ' '  + project.$client.lastName : 'Client introuvable' }}
+                        <div class="card-content">
+                            <div class="card-actions">
+                                <button type="button" class="btn btn-danger btn-simple fix-broken-card">
+                                    <i class="material-icons">build</i> Réparer
+                                </button>
+                                <a [routerLink]="'/projects/view/' + project.$key" class="btn btn-default btn-simple" rel="tooltip" data-placement="bottom" title="Voir">
+                                    <i class="material-icons">art_track</i>
+                                </a>
+                                <a [routerLink]="'/projects/edit/' + project.$key" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Editer">
+                                    <i class="material-icons">edit</i>
+                                </a>
+                                <button (click)="removeProject(project)" type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Supprimer">
+                                    <i class="material-icons">close</i>
+                                </button>
+                            </div>
+                            <h4 class="card-title">
+                                <a href="#pablo">{{ project.title }}</a>
                             </h4>
+                            <div class="card-description">
+                                {{ project.description }}
+                            </div>
                         </div>
-                        <div class="stats pull-right">
-                            <ul class="category">
-                                <li *ngFor="let commercial of project.$commercials">
-                                    {{ commercial.firstName + ' ' + commercial.lastName }}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="card card-product">
-                    <div class="card-content">
-                        <h1 class="card-title">
-                            <a routerLink="/projects/new">
-                                <i class="fa fa-plus"></i>
-                            </a>
-                        </h1>
-                    </div>
-                    <div class="card-footer text-center">
-                        <div class="price">
-                            Nouveau projet
+                        <div class="card-footer">
+                            <div class="price">
+                                <h4>
+                                    {{ project.$client ? project.$client.firstName + ' '  + project.$client.lastName : 'Client introuvable' }}
+                                </h4>
+                            </div>
+                            <div class="stats pull-right">
+                                <ul class="category">
+                                    <li *ngFor="let commercial of project.$commercials">
+                                        {{ commercial.firstName + ' ' + commercial.lastName }}
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+                <div class="col-lg-4 col-md-6" *ngIf="userService.role === 'commercial'">
+                    <div class="card card-product">
+                        <div class="card-content">
+                            <h1 class="card-title">
+                                <a routerLink="/projects/new">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                            </h1>
+                        </div>
+                        <div class="card-footer text-center">
+                            <div class="price">
+                                Nouveau projet
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+            </ng-container>
         </div>
 
     </div>
