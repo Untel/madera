@@ -18,9 +18,9 @@
                                 <a [routerLink]="'/projects/view/' + project.$key" class="btn btn-default btn-simple" rel="tooltip" data-placement="bottom" title="Voir">
                                     <i class="material-icons">art_track</i>
                                 </a>
-                                <a [routerLink]="'/projects/edit/' + project.$key" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Editer">
+                                <!-- <a [routerLink]="'/projects/edit/' + project.$key" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Editer">
                                     <i class="material-icons">edit</i>
-                                </a>
+                                </a> -->
                                 <button (click)="removeProject(project)" type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Supprimer">
                                     <i class="material-icons">close</i>
                                 </button>
@@ -48,25 +48,24 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-4 col-md-6" *ngIf="userService.role === 'commercial'">
-                    <div class="card card-product">
-                        <div class="card-content">
-                            <h1 class="card-title">
-                                <a routerLink="/projects/new">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                            </h1>
-                        </div>
-                        <div class="card-footer text-center">
-                            <div class="price">
-                                Nouveau projet
-                            </div>
+            </ng-container>
+            <div class="col-lg-4 col-md-6" *ngIf="userService.role === 'commercial'">
+                <div class="card card-product">
+                    <div class="card-content">
+                        <h1 class="card-title">
+                            <a routerLink="/projects/new">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </h1>
+                    </div>
+                    <div class="card-footer text-center">
+                        <div class="price">
+                            Nouveau projet
                         </div>
                     </div>
                 </div>
+            </div>
 
-            </ng-container>
         </div>
 
     </div>

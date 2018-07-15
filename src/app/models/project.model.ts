@@ -16,6 +16,8 @@ export interface Project {
 
     modules?: Array<any>;
 
+    step: number,
+
     $key?: string;
     $exists?: any;
 }

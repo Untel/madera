@@ -57,6 +57,7 @@ export class NewProjectComponent implements OnInit, OnDestroy, AfterViewInit {
         commercials: [],
         reference: '',
         client: '',
+        step: 0,
         pictures: [],
         modules: [],
     };
@@ -137,6 +138,7 @@ export class NewProjectComponent implements OnInit, OnDestroy, AfterViewInit {
             commercials: form.commercials,
             reference: form.reference,
             client: form.client,
+            step: 0,
             pictures: this.pictures,
             modules: this.modulesTable.dataRows,
         };
