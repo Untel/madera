@@ -2,7 +2,7 @@
     <div class="container-fluid">
 		<div class="col-md-12">
 				<!-- <pre>{{project | json}}</pre> -->
-			<form #newModuleForm="ngForm" (ngSubmit)="onSubmit()">
+			<form #newModuleForm="ngForm" (ngSubmit)="onSubmit(newModuleForm)">
                 <div class="card">
 
                     <div class="card-header card-header-icon" data-background-color="blue">
@@ -45,6 +45,7 @@
 									<label class="control-label">Prix</label>
 									<input required 
 										type="number"
+										step=".01"
 										[(ngModel)]="mod.price"
 										name="reference"
 										class="form-control"/>
@@ -65,7 +66,7 @@
 							<div class="col-md-6">
 								<div class="form-group label-floating">
 									<label class="control-label">Gamme</label>
-									<select 
+									<select required
 										class="selectpicker selectGamme fixIcon" 
 										data-style="select-with-transition" 
 										title="Gamme"
@@ -82,7 +83,7 @@
 							<div class="col-md-6">
 								<div class="form-group label-floating">
 									<label class="control-label">Type</label>
-									<select 
+									<select required
 										class="selectpicker selectType fixIcon" 
 										data-style="select-with-transition" 
 										title="Type"
@@ -106,7 +107,7 @@
 							<div class="col-md-6">
 								<div class="form-group label-floating">
 									<label class="control-label">Ossature</label>
-									<select 
+									<select required 
 										class="selectpicker selectOssature fixIcon" 
 										data-style="select-with-transition" 
 										title="ossature"
@@ -126,7 +127,7 @@
 							<div class="col-md-6">
 								<div class="form-group label-floating">
 									<label class="control-label">Isolant</label>
-									<select 
+									<select required 
 										class="selectpicker selectOssature fixIcon" 
 										data-style="select-with-transition" 
 										title="isolant"
@@ -143,7 +144,7 @@
 							<div class="col-md-6">
 								<div class="form-group label-floating">
 									<label class="control-label">Habillage</label>
-									<select 
+									<select required 
 										class="selectpicker selectOssature fixIcon" 
 										data-style="select-with-transition" 
 										title="habillage"
@@ -161,7 +162,7 @@
 							<div class="col-md-6">
 								<div class="form-group label-floating">
 									<label class="control-label">Pare-pluie</label>
-									<select 
+									<select required 
 										class="selectpicker selectOssature fixIcon" 
 										data-style="select-with-transition" 
 										title="parePluie"
@@ -180,7 +181,7 @@
 							<div class="col-md-6">
 								<div class="form-group label-floating">
 									<label class="control-label">Parement intérieur</label>
-									<select 
+									<select required 
 										class="selectpicker selectOssature fixIcon" 
 										data-style="select-with-transition" 
 										title="parement"
@@ -200,7 +201,7 @@
 							<div class="col-md-6">
 								<div class="form-group label-floating">
 									<label class="control-label">Pare-vapeur</label>
-									<select 
+									<select required 
 										class="selectpicker selectOssature fixIcon" 
 										data-style="select-with-transition" 
 										title="pareVapeur"
@@ -216,7 +217,7 @@
 							<div class="col-md-6">
 								<div class="form-group label-floating">
 									<label class="control-label">Isolant</label>
-									<select 
+									<select required 
 										class="selectpicker selectOssature fixIcon" 
 										data-style="select-with-transition" 
 										title="isolant"
@@ -237,7 +238,7 @@
 							<div class="col-md-6">
 								<div class="form-group label-floating">
 									<label class="control-label">Plafond</label>
-									<select 
+									<select required 
 										class="selectpicker selectOssature fixIcon" 
 										data-style="select-with-transition" 
 										title="ossature"
@@ -253,7 +254,7 @@
 							<div class="col-md-6">
 								<div class="form-group label-floating">
 									<label class="control-label">Isolant</label>
-									<select 
+									<select required 
 										class="selectpicker selectOssature fixIcon" 
 										data-style="select-with-transition" 
 										title="isolant"
@@ -270,7 +271,7 @@
 							<div class="col-md-6">
 								<div class="form-group label-floating">
 									<label class="control-label">Pare-vapeur</label>
-									<select 
+									<select required 
 										class="selectpicker selectOssature fixIcon" 
 										data-style="select-with-transition" 
 										title="pareVapeur"
@@ -288,7 +289,7 @@
 							<div class="col-md-6">
 								<div class="form-group label-floating">
 									<label class="control-label">Pare-pluie</label>
-									<select 
+									<select required 
 										class="selectpicker selectOssature fixIcon" 
 										data-style="select-with-transition" 
 										title="parePluie"
@@ -307,7 +308,7 @@
 							<div class="col-md-6">
 								<div class="form-group label-floating">
 									<label class="control-label">Dalle de plancher</label>
-									<select 
+									<select required 
 										class="selectpicker selectOssature fixIcon" 
 										data-style="select-with-transition" 
 										title="ossature"
@@ -324,7 +325,7 @@
 							<div class="col-md-6">
 								<div class="form-group label-floating">
 									<label class="control-label">Solive</label>
-									<select 
+									<select required 
 										class="selectpicker selectOssature fixIcon" 
 										data-style="select-with-transition" 
 										title="isolant"

@@ -21,7 +21,7 @@
                                 <!-- <a [routerLink]="'/projects/edit/' + project.$key" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Editer">
                                     <i class="material-icons">edit</i>
                                 </a> -->
-                                <button (click)="removeProject(project)" type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Supprimer">
+                                <button *ngIf="userService.role === 'commercial'" (click)="removeProject(project)" type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Supprimer">
                                     <i class="material-icons">close</i>
                                 </button>
                             </div>

@@ -6,7 +6,7 @@ import { AngularFire } from 'angularfire2';
 
 import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
 
 declare var $: any;
 
@@ -27,6 +27,12 @@ export class NewModuleComponent implements OnInit, OnDestroy, AfterViewInit {
     };
 
     public spe: any = {};
+    public speLength = {
+        'mure': 4,
+        'muri': 3,
+        'toit': 4,
+        'sol': 2,
+    };
 
     get type(): String {
         return this.mod.type;
@@ -50,19 +56,25 @@ export class NewModuleComponent implements OnInit, OnDestroy, AfterViewInit {
     ngOnDestroy() {
     }
 
-    onSubmit(form) {
+    onSubmit(form: NgForm) {
         this.submitting = true;
+
+        if (!form.valid) {
+            this.ui.warning('Veuillez remplir tout les champs du formulaire');
+            return;
+        }
+
         const obj = Object.assign({}, this.mod, {components: this.spe});
         this.af.database.list('/modules')
             .push(obj)
 			.then(p => {
                 this.submitting = false;
-                this.ui.success('Le module a bien été supprimé!');
+                this.ui.success('Le module a bien été créé');
                 this.router.navigateByUrl('/modules');
             })
 			.catch(e => {
                 this.submitting = false;
-                this.ui.danger(`Le module n'a pas pu être supprimé`);
+                this.ui.danger(`Le module n'a pas pu être créé`);
             });
     }
 
