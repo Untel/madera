@@ -57,6 +57,7 @@ export class NewClientComponent implements OnInit, OnDestroy, AfterViewInit {
 
         if (this.client.password !== this.client.confirmPassword) {
             this.ui.danger('Les mots de passe sont différents');
+            this.submitting = false;
             return;
         }
         const obj = Object.assign({}, this.client);
@@ -65,6 +66,12 @@ export class NewClientComponent implements OnInit, OnDestroy, AfterViewInit {
         const handleError = (err, step) => {
             console.log('Error at step ' + step, err);
             this.submitting = false;
+        }
+
+        if (!this.auth.credentials) {
+            this.ui.primary('Veuillez vous reconnecter pour affectuer cette action.')
+            this.submitting = false;
+            return;
         }
 
         this.af.auth.createUser({

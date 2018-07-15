@@ -58,7 +58,14 @@
                                 </div>-->
 
                             </div>
-                            <button type="submit" class="btn btn-success pull-right">Mettre à jours</button>
+                        
+                            <hr>
+                            <div class="clearfix"></div>
+                            <button type="button" (click)="deleteAccount()" class="btn btn-danger btn-sm">Supprimer mon compte</button>
+                            <a href="/pages/lock" class="btn btn-primary btn-sm">Changer de mot de passe</a>
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-success">Mettre à jours</button>
+                            </div>
                             <div class="clearfix"></div>
                         </form>
                     </div>

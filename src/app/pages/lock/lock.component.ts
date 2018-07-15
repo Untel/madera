@@ -16,9 +16,9 @@ declare var $:any;
 export class LockComponent implements OnInit{
     user;
     constructor(
-        private af: AngularFire, 
-        private auth: AuthService, 
-        private userService: UserService, 
+        private af: AngularFire,
+        private auth: AuthService,
+        private userService: UserService,
         private ui: UiService,
         private router: Router,
     ) {}
@@ -34,15 +34,6 @@ export class LockComponent implements OnInit{
         }
     };
     ngOnInit(){
-
-        this.af.auth.subscribe((state) => {
-            console.log('State is', state);
-        });
-
-        this.userService.user$.subscribe((user) => {
-            console.log('USER IS ', user);
-        });
-
         this.checkFullPageBackgroundImage();
 
         setTimeout(function(){
@@ -57,8 +48,14 @@ export class LockComponent implements OnInit{
             return;
         }
 
-        setTimeout(() => {
-            this.router.navigateByUrl('/pages/login');
-        }, 2000);
+        this.af.auth.getAuth().auth.updatePassword(form.password)
+            .then(() => {
+                this.ui.success('Votre mot de passe à bien été modifié');
+                this.router.navigateByUrl('/');
+            })
+            .catch(() => {
+                this.router.navigateByUrl('/');
+                this.ui.warning('Vous êtes connecté depuis trop longtemps, veuillez vous déconnecter puis vous reconnecter pour changer de mot de passe');
+            });
     }
 }

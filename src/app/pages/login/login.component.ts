@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit{
         const randomColor = this.getRandomColor(actualColor);
 
         switch(err.code) {
+            case 'auth/user-not-found':
             case 'auth/invalid-email': {
                 header.attr('data-background-color', randomColor);
                 this.errorMessage = `Cette adresse e-mail est inconnue`;
@@ -67,7 +68,7 @@ export class LoginComponent implements OnInit{
             }
             case 'auth/wrong-password': {
                 header.attr('data-background-color', randomColor);
-                this.errorMessage = `Ce mot de passe est invalide, ou ce compte n'a pas de mot de passe`;
+                this.errorMessage = `Ce mot de passe est invalide`;
                 break;
             }
             case 'auth/popup-closed-by-user': {

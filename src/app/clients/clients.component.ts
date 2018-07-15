@@ -35,7 +35,7 @@ export class ClientsComponent implements OnInit, AfterViewInit {
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonText: 'Supprimer',
-			cancelButtonText: 'Annuler, ',
+			cancelButtonText: 'Annuler',
 			confirmButtonClass: 'btn btn-danger',
 			cancelButtonClass: 'btn btn-warning',
 			buttonsStyling: false

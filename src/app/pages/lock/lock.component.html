@@ -45,7 +45,7 @@
                             <form #loginForm="ngForm" method="#" action="#">
                                 <div class="card card-login card-hidden">
                                     <div id="cardHeader" style="" class="card-header text-center" data-background-color="purple">
-                                        <h4 class="card-title">{{ ( errorMessage ? 'Erreur' : 'Connexion') }}</h4>
+                                        <h4 class="card-title">{{ ( errorMessage ? 'Erreur' : 'Mot de passe') }}</h4>
                                         <p *ngIf="errorMessage">{{ errorMessage }}</p>
                                         <div class="social-line"></div>
                                     </div>
@@ -85,7 +85,7 @@
                                             </div>
                                         </div>
                                         <div class="footer text-center">
-                                            <button type="submit" class="btn btn-primary btn-simple btn-wd btn-lg">Valider et se connecter</button>
+                                            <button type="submit" class="btn btn-primary btn-simple btn-wd btn-lg">Valider</button>
                                         </div>
                                     </form>
                                 </div>
