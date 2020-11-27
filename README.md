@@ -6,7 +6,8 @@
     https://madera-8ef40.firebaseapp.com/
     
 ## Comptes de test
-    compte client           : client1@test.fr
+    compte commercial       : commercial1@madera.fr
+    compte client           : client1@madera.fr
     compte comptabilité     : compta@madera.fr
     compte bureau d'étude   : etude@madera.fr
 
