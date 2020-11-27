@@ -5,12 +5,12 @@
 ## Live preview
     https://madera-8ef40.firebaseapp.com/
     
-    Connecter vous pour tester:
-    compte client: client1@test.fr
-    compte compta: compta@madera.fr
-    bureau d'étude: etude@madera.fr
-    
-    Mot de passe pour chacun de ces comptes: azerty
+## Comptes de test
+    compte client           : client1@test.fr
+    compte comptabilité     : compta@madera.fr
+    compte bureau d'étude   : etude@madera.fr
+
+    Mot de passe            : azerty
 
 ## Installation
 
