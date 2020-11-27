@@ -1,7 +1,5 @@
 # Projet fil rouge CESI BREST
 
-*CAM : Équipe projet fil rouge composé de Clément DEBOOS, Max-André LEROY et Adrien FERNANDES*
-
 ## Live preview
     https://madera-8ef40.firebaseapp.com/
     
