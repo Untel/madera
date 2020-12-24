@@ -1,6 +1,6 @@
 # Projet fil rouge CESI BREST
 
-Projet fil rouge effectué lors de mes années au CESI Brest. Réalisation d'une application de création et suivis de devis pour la construction de maisons modulaires à partir d'un cahier des charge. Cette application inclus plusieurs rôles donnant accès à différentes fonctionnalités.
+Projet fil rouge effectué lors de mes années au CESI Brest. Réalisation d'une application de création et suivis de devis pour la construction de maisons modulaires à partir d'un cahier des charges. Cette application inclus plusieurs rôles donnant accès à différentes fonctionnalités.
 
 ## Live preview
 
